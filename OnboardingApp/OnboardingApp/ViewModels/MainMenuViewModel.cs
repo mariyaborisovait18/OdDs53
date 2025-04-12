@@ -9,6 +9,11 @@ namespace OnboardingApp.ViewModels
 {
     public class MainMenuViewModel : Screen
     {
+        public EventHandler<EventArgs> GoToOfficeMapCommandEventHandler;
 
+        public void GoToOfficeMapCommand()
+        {
+            GoToOfficeMapCommandEventHandler.Invoke(this, EventArgs.Empty);
+        }
     }
 }

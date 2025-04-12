@@ -40,20 +40,23 @@ namespace OnboardingApp.ViewModels
             _officeMapViewModel = officeMapViewModel;
             _tasksViewModel = tasksViewModel;
 
+            _officeMapViewModel.GoToMainMenuEventHandler += OpenMainMenu;
+            _mainMenuViewModel.GoToOfficeMapCommandEventHandler += OpenOfficeMap;
+
+
             ActiveItem = mainMenuViewModel;
 
         }
 
-        public void OpenMap()
+        public void OpenMainMenu(object sender, EventArgs e)
+        {
+            ActiveItem = _mainMenuViewModel;
+        }
+
+        public void OpenOfficeMap(object sender, EventArgs e)
         {
             ActiveItem = _officeMapViewModel;
         }
-
-        public void SetTextCommand()
-        {
-            Text = "Дата и время: " + DateTime.Now.ToString();
-        }
-
 
         public void Dispose()
         {

@@ -12,11 +12,19 @@
 
             <s:ApplicationLoader.MergedDictionaries>
                 <hc:ThemeResources UsingSystemTheme="True"/>
-
                 <hc:Theme />
 
-
+                <!-- Добавление ресурсов Material Design -->
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                        <!-- Удален несуществующий ресурс MaterialDesignTheme.Base.xaml -->
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
             </s:ApplicationLoader.MergedDictionaries>
         </s:ApplicationLoader>
     </Application.Resources>
 </Application>
+
+

@@ -22,7 +22,7 @@ namespace OnboardingApp.Views
     {
         public EmployersView()
         {
-            InitializeComponent();
+           
         }
     }
 }

@@ -12,17 +12,25 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Controls;
+using OnboardingApp.ViewModels;
 
 namespace OnboardingApp.Views
 {
-    /// <summary>
-    /// Логика взаимодействия для MainMenuView.xaml
-    /// </summary>
     public partial class MainMenuView : UserControl
     {
         public MainMenuView()
         {
             InitializeComponent();
+            DataContext = new MainMenuViewModel(); // Устанавливаем контекст данных
+        }
+
+        private void EmployeesList_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            // Выполните команду, если нужно
+            var viewModel = DataContext as MainMenuViewModel;
+            viewModel?.ShowEmployeesCommand.Execute(null); // Выполнение команды
         }
     }
 }
+

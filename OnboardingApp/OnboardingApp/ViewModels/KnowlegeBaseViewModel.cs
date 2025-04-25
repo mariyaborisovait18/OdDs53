@@ -9,6 +9,12 @@ namespace OnboardingApp.ViewModels
 {
     public class KnowlegeBaseViewModel : Screen
     {
+        //переключение на главное меню
+        public EventHandler<EventArgs> GoToMainMenuEventHandler;
 
+        public void GoToMainMenuCommand()
+        {
+            GoToMainMenuEventHandler?.Invoke(this, EventArgs.Empty);
+        }
     }
 }

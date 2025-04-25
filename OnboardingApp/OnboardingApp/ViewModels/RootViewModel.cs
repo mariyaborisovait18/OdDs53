@@ -40,8 +40,21 @@ namespace OnboardingApp.ViewModels
             _officeMapViewModel = officeMapViewModel;
             _tasksViewModel = tasksViewModel;
 
+            //окна связанные с картой офиса
             _officeMapViewModel.GoToMainMenuEventHandler += OpenMainMenu;
             _mainMenuViewModel.GoToOfficeMapCommandEventHandler += OpenOfficeMap;
+
+            //окна связанные с списком сотрудников
+            _employersViewModel.GoToMainMenuEventHandler += OpenMainMenu;
+            _mainMenuViewModel.GoToEmployersCommandEventHandler += OpenOfficeMap;
+
+            //окна связанные с базой знаний
+            _knowlegeBaseViewModel.GoToMainMenuEventHandler += OpenMainMenu;
+            _mainMenuViewModel.GoToKnowlegeBaseCommandEventHandler += OpenOfficeMap;
+
+            //окна связанные с списком задач
+            _tasksViewModel.GoToMainMenuEventHandler += OpenMainMenu;
+            _mainMenuViewModel.GoToTasksCommandEventHandler += OpenOfficeMap;
 
 
             ActiveItem = mainMenuViewModel;

@@ -4,7 +4,7 @@
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:s="https://github.com/canton7/Stylet"
              xmlns:local="clr-namespace:OnboardingApp"
-             StartupUri="MainWindow.xaml">
+             StartupUri="RootView.xaml">
     <Application.Resources>
         <s:ApplicationLoader>
             <s:ApplicationLoader.Bootstrapper>

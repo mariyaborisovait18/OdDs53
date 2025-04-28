@@ -1,8 +1,28 @@
 ﻿using HandyControl.Tools.Command;
-using OnboardingApp.Models;
+using Stylet;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using OnboardingApp.Models;
 
+
+namespace OnboardingApp.ViewModels
+{
+    public class EmployersViewModel : Screen
+    {
+        //переключение на главное меню
+        public EventHandler<EventArgs> GoToMainMenuEventHandler;
+
+        public void GoToMainMenuCommand()
+        {
+            GoToMainMenuEventHandler?.Invoke(this, EventArgs.Empty);
+        }
+    }
+}
 public class EmployeesViewModel : INotifyPropertyChanged
 {
     private ObservableCollection<Employee> _employees;
@@ -18,7 +38,6 @@ public class EmployeesViewModel : INotifyPropertyChanged
             OnPropertyChanged(nameof(Employees));
         }
     }
-
     public string Name
     {
         get => _name;
@@ -62,6 +81,9 @@ public class EmployeesViewModel : INotifyPropertyChanged
         }
     }
 
+
+
+
     private bool CanAddEmployee()
     {
         return !string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Department);
@@ -82,6 +104,4 @@ public class EmployeesViewModel : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }
-
-
 

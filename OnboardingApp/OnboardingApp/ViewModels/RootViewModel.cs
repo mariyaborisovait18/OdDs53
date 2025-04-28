@@ -9,11 +9,13 @@ namespace OnboardingApp.ViewModels
 {
     public class RootViewModel : Conductor<IScreen>.Collection.OneActive, IDisposable
     {
-        private readonly EmployeesViewModel _employeesViewModel;
+        private readonly EmployersViewModel _employersViewModel;
         private readonly KnowlegeBaseViewModel _knowlegeBaseViewModel;
         private readonly MainMenuViewModel _mainMenuViewModel;
         private readonly OfficeMapViewModel _officeMapViewModel;
         private readonly TasksViewModel _tasksViewModel;
+
+
 
         private string _text = "";
         public string Text
@@ -26,30 +28,47 @@ namespace OnboardingApp.ViewModels
             }
         }
 
-        public RootViewModel(
-            EmployeesViewModel employeesViewModel,
+        public RootViewModel(EmployersViewModel employersViewModel,
             KnowlegeBaseViewModel knowlegeBaseViewModel,
             MainMenuViewModel mainMenuViewModel,
             OfficeMapViewModel officeMapViewModel,
             TasksViewModel tasksViewModel)
         {
-            _employeesViewModel = employeesViewModel;
+            _employersViewModel = employersViewModel;
             _knowlegeBaseViewModel = knowlegeBaseViewModel;
             _mainMenuViewModel = mainMenuViewModel;
             _officeMapViewModel = officeMapViewModel;
             _tasksViewModel = tasksViewModel;
 
-            ActiveItem = mainMenuViewModel; // Задаем элемент по умолчанию
+            //окна связанные с картой офиса
+            _officeMapViewModel.GoToMainMenuEventHandler += OpenMainMenu;
+            _mainMenuViewModel.GoToOfficeMapCommandEventHandler += OpenOfficeMap;
+
+            //окна связанные с списком сотрудников
+            _employersViewModel.GoToMainMenuEventHandler += OpenMainMenu;
+            _mainMenuViewModel.GoToEmployersCommandEventHandler += OpenOfficeMap;
+
+            //окна связанные с базой знаний
+            _knowlegeBaseViewModel.GoToMainMenuEventHandler += OpenMainMenu;
+            _mainMenuViewModel.GoToKnowlegeBaseCommandEventHandler += OpenOfficeMap;
+
+            //окна связанные с списком задач
+            _tasksViewModel.GoToMainMenuEventHandler += OpenMainMenu;
+            _mainMenuViewModel.GoToTasksCommandEventHandler += OpenOfficeMap;
+
+
+            ActiveItem = mainMenuViewModel;
+
         }
 
-        public void OpenMap()
+        public void OpenMainMenu(object sender, EventArgs e)
+        {
+            ActiveItem = _mainMenuViewModel;
+        }
+
+        public void OpenOfficeMap(object sender, EventArgs e)
         {
             ActiveItem = _officeMapViewModel;
-        }
-
-        public void SetTextCommand()
-        {
-            Text = "Дата и время: " + DateTime.Now.ToString();
         }
 
         public void Dispose()

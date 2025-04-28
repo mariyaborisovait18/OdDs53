@@ -1,63 +1,44 @@
-﻿using OnboardingApp.Views;
-using Stylet;
+﻿using Stylet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
 
 namespace OnboardingApp.ViewModels
 {
     public class MainMenuViewModel : Screen
     {
-        private object _mainContent;
+        //переключение на карту офиса
+        public EventHandler<EventArgs> GoToOfficeMapCommandEventHandler;
 
-        public object MainContent
+        public void GoToOfficeMapCommand()
         {
-            get => _mainContent;
-            set
-            {
-                _mainContent = value;
-                NotifyOfPropertyChange(() => MainContent);
-            }
+            GoToOfficeMapCommandEventHandler.Invoke(this, EventArgs.Empty);
         }
 
-        public ICommand ShowEmployeesCommand { get; private set; }
+        //переключение на сотрудников
+        public EventHandler<EventArgs> GoToEmployersCommandEventHandler;
 
-        public MainMenuViewModel()
+        public void GoToEmployersCommand()
         {
-            // Инициализация команды для отображения сотрудников
-            ShowEmployeesCommand = new RelayCommand(ShowEmployees);
+            GoToEmployersCommandEventHandler.Invoke(this, EventArgs.Empty);
         }
 
-        private void ShowEmployees()
-        {
-            var employeesView = new EmployeesView();
-            employeesView.DataContext = new EmployeesViewModel(); // Установка контекста данных для EmployeesView
-            MainContent = employeesView; // Здесь мы устанавливаем содержимое
-        }
-    }
+        //переключение на задачи
+        public EventHandler<EventArgs> GoToTasksCommandEventHandler;
 
-    // Реализация RelayCommand для применения ICommand
-    public class RelayCommand : ICommand
-    {
-        private readonly Action _execute;
-        private readonly Func<bool> _canExecute;
-
-        public RelayCommand(Action execute, Func<bool> canExecute = null)
+        public void GoToTasksCommand()
         {
-            _execute = execute;
-            _canExecute = canExecute;
+            GoToTasksCommandEventHandler.Invoke(this, EventArgs.Empty);
         }
 
-        public event EventHandler CanExecuteChanged;
+        //переключение на базу знаний
+        public EventHandler<EventArgs> GoToKnowlegeBaseCommandEventHandler;
 
-        public bool CanExecute(object parameter) => _canExecute == null || _canExecute();
-
-        public void Execute(object parameter) => _execute();
-
-        public void RaiseCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+        public void GoToKnowlegeBaseCommand()
+        {
+            GoToKnowlegeBaseCommandEventHandler.Invoke(this, EventArgs.Empty);
+        }
     }
 }

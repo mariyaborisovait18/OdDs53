@@ -10,6 +10,10 @@ namespace OnboardingApp
 {
     public class Bootstrapper : Bootstrapper<RootViewModel>
     {
+        public Bootstrapper()
+        {
+            // Конструктор
+        }
 
     }
 }

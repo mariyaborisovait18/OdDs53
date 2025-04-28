@@ -3,28 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:s="https://github.com/canton7/Stylet"
-             xmlns:local="clr-namespace:OnboardingApp">
+             xmlns:local="clr-namespace:OnboardingApp"
+             StartupUri="MainWindow.xaml">
     <Application.Resources>
         <s:ApplicationLoader>
             <s:ApplicationLoader.Bootstrapper>
                 <local:Bootstrapper/>
             </s:ApplicationLoader.Bootstrapper>
-
             <s:ApplicationLoader.MergedDictionaries>
                 <hc:ThemeResources UsingSystemTheme="True"/>
                 <hc:Theme />
-
-                <!-- Добавление ресурсов Material Design -->
-                <ResourceDictionary>
-                    <ResourceDictionary.MergedDictionaries>
-                        
-                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
-                        <!-- Удален несуществующий ресурс MaterialDesignTheme.Base.xaml -->
-                    </ResourceDictionary.MergedDictionaries>
-                </ResourceDictionary>
             </s:ApplicationLoader.MergedDictionaries>
         </s:ApplicationLoader>
     </Application.Resources>
 </Application>
-
 

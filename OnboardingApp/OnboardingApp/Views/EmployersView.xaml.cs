@@ -12,6 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Stylet;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 
 namespace OnboardingApp.Views
 {

@@ -3,16 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:s="https://github.com/canton7/Stylet"
-             xmlns:local="clr-namespace:OnboardingApp"
-             StartupUri="RootView.xaml">
+             xmlns:local="clr-namespace:OnboardingApp">
     <Application.Resources>
         <s:ApplicationLoader>
             <s:ApplicationLoader.Bootstrapper>
                 <local:Bootstrapper/>
             </s:ApplicationLoader.Bootstrapper>
+
             <s:ApplicationLoader.MergedDictionaries>
                 <hc:ThemeResources UsingSystemTheme="True"/>
+
                 <hc:Theme />
+
             </s:ApplicationLoader.MergedDictionaries>
         </s:ApplicationLoader>
     </Application.Resources>

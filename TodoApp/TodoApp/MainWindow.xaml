@@ -1,0 +1,48 @@
+﻿<Window x:Class="TodoApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TodoApp"
+        mc:Ignorable="d"
+        Title="TodoApp" Height="500" Width="800" Loaded="Window_Loaded">
+	<Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+
+        <GroupBox Header="Знакомство с компанией" Grid.Row="1" Margin="5">
+			<DataGrid x:Name="dgOrganizational" FontSize="16" FontWeight="Bold" Margin="5" AutoGenerateColumns="False">
+				<DataGrid.Columns>
+					<DataGridTextColumn Binding="{Binding CreationDate}" IsReadOnly="True" Header="Время" Width="180"/>
+					<DataGridCheckBoxColumn Binding="{Binding IsDone, UpdateSourceTrigger=PropertyChanged}" Header=" " Width="80"/>
+                    <DataGridTextColumn Binding="{Binding Text}" IsReadOnly="True" Header="Задачи" Width="*"/>
+				</DataGrid.Columns>
+			</DataGrid>
+		</GroupBox>
+
+		<GroupBox Header="Знакомство с проектом" Grid.Row="2" Margin="5">
+			<DataGrid x:Name="dgTechnical" FontSize="16" FontWeight="Bold" Margin="5" AutoGenerateColumns="False">
+				<DataGrid.Columns>
+					<DataGridTextColumn Binding="{Binding CreationDate}" IsReadOnly="True" Header="Время" Width="180"/>
+                    <DataGridCheckBoxColumn Binding="{Binding IsDone, UpdateSourceTrigger=PropertyChanged}" Header=" " Width="80"/>
+                    <DataGridTextColumn Binding="{Binding Text}" IsReadOnly="True" Header="Задачи" Width="*"/>
+				</DataGrid.Columns>
+			</DataGrid>
+		</GroupBox>
+
+		<GroupBox Header="Знакомство с командой" Grid.Row="3" Margin="5">
+			<DataGrid x:Name="dgTraining" FontSize="16" FontWeight="Bold" Margin="5" AutoGenerateColumns="False">
+				<DataGrid.Columns>
+					<DataGridTextColumn Binding="{Binding CreationDate}" IsReadOnly="True" Header="Время" Width="180"/>
+                    <DataGridCheckBoxColumn Binding="{Binding IsDone, UpdateSourceTrigger=PropertyChanged}" Header=" " Width="80"/>
+                    <DataGridTextColumn Binding="{Binding Text}" IsReadOnly="True" Header="Задачи" Width="*"/>
+				</DataGrid.Columns>
+			</DataGrid>
+		</GroupBox>
+	</Grid>
+</Window>

@@ -33,6 +33,7 @@ namespace OnboardingApp.Views
             {
                 string mapString = System.Text.Encoding.UTF8.GetString(Properties.Resources.map);
                 myWebView2.NavigateToString(mapString);
+
             }
             catch (Exception ex)
             {

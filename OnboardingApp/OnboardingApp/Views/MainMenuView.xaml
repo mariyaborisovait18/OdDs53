@@ -55,10 +55,10 @@
                     <Button Height="140" Width="350" Content="Список сотрудников" Cursor="Hand" BorderBrush="Transparent" Background="Transparent" FontSize="20" Command="{s:Action GoToEmployersCommand}"/>
                 </Border>
                 <Border Height="100" Background="{DynamicResource SuccessBrush}" Effect="{StaticResource EffectShadow1}">
-                    <Button Height="100" Width="350" Content="База знаний" Cursor="Hand" BorderBrush="Transparent" Background="Transparent" FontSize="20" Command="{s:Action GoToEmployersCommand}"/>
+                    <Button Height="100" Width="350" Content="База знаний" Cursor="Hand" BorderBrush="Transparent" Background="Transparent" FontSize="20" Command="{s:Action GoToKnowlegeBaseCommand}"/>
                 </Border>
                 <Border Height="170" Background="{DynamicResource InfoBrush}" Effect="{StaticResource EffectShadow1}" Margin="5">
-                    <Button Height="170" Width="350" Content="Текущие задачи" Cursor="Hand" BorderBrush="Transparent" Background="Transparent" FontSize="20" Command="{s:Action GoToEmployersCommand}"/>
+                    <Button Height="170" Width="350" Content="Текущие задачи" Cursor="Hand" BorderBrush="Transparent" Background="Transparent" FontSize="20" Command="{s:Action GoToTasksCommand}"/>
                 </Border>
             </hc:WaterfallPanel>
         </hc:ScrollViewer>

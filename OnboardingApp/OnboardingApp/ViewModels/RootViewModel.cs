@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OnboardingApp.ViewModels
 {
-    public class RootViewModel : Conductor<IScreen>.Collection.OneActive, IDisposable
+    public class RootViewModel : Conductor<IScreen>.Collection.OneActive/*, IDisposable*/
     {
         private readonly EmployersViewModel _employersViewModel;
         private readonly KnowlegeBaseViewModel _knowlegeBaseViewModel;
@@ -50,13 +50,13 @@ namespace OnboardingApp.ViewModels
 
             //окна связанные с базой знаний
             _knowlegeBaseViewModel.GoToMainMenuEventHandler += OpenMainMenu;
-            _mainMenuViewModel.GoToKnowlegeBaseCommandEventHandler += OpenOfficeMap;
+            _mainMenuViewModel.GoToKnowlegeBaseCommandEventHandler += OpenKnowlegeBase;
 
             //окна связанные с списком задач
             _tasksViewModel.GoToMainMenuEventHandler += OpenMainMenu;
-            _mainMenuViewModel.GoToTasksCommandEventHandler += OpenOfficeMap;
+            _mainMenuViewModel.GoToTasksCommandEventHandler += OpenTasks;
 
-
+         
             ActiveItem = mainMenuViewModel;
 
         }
@@ -76,9 +76,18 @@ namespace OnboardingApp.ViewModels
             ActiveItem = _employersViewModel;
         }
 
-        public void Dispose()
+        public void OpenKnowlegeBase(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            ActiveItem = _knowlegeBaseViewModel;
         }
+
+        public void OpenTasks(object sender, EventArgs e)
+        {
+            ActiveItem = _tasksViewModel;
+        }
+        //public void Dispose()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

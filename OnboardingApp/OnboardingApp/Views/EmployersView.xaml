@@ -7,14 +7,14 @@
     xmlns:av="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:hc="https://handyorg.github.io/handycontrol"      
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:s="https://github.com/canton7/Stylet"
+    
     Height="400" Width="400">
 
     <Grid>
-        <StackPanel Margin="10">
-            <!-- Кнопка для возврата в главное меню -->
-            <Button Content="Go to main menu" Command="{Binding GoToMainMenuCommand}" Margin="0,0,0,10"/>
-
-            <!-- Панель для ввода данных сотрудника -->
+        <StackPanel>
+        <Button Content="Go to main menu" Command="{s:Action GoToMainMenuCommand}" Click="Button_Click"/>
+        <!-- Панель для ввода данных сотрудника -->
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <TextBox Width="50" 
                          md:HintAssist.Hint="Id"

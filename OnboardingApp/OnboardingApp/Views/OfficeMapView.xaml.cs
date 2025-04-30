@@ -23,6 +23,22 @@ namespace OnboardingApp.Views
         public OfficeMapView()
         {
             InitializeComponent();
+            InitializeWebView2();
+        }
+
+        async void InitializeWebView2()
+        {
+            await myWebView2.EnsureCoreWebView2Async();
+            try
+            {
+                string mapString = System.Text.Encoding.UTF8.GetString(Properties.Resources.map);
+                myWebView2.NavigateToString(mapString);
+            }
+            catch (Exception ex)
+            {
+                // Обработка исключения, например, вывод сообщения об ошибке
+                MessageBox.Show($"Ошибка при загрузке карты: {ex.Message}");
+            }
         }
     }
 }

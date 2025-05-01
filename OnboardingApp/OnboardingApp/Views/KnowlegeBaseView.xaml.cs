@@ -24,5 +24,11 @@ namespace OnboardingApp.Views
         {
             InitializeComponent();
         }
+
+        private void ArticlesDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Ваш код для обработки изменения выбора в DataGrid
+            // Например, вы можете вывести информацию о выбранной статье
+        }
     }
 }

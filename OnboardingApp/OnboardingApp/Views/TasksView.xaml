@@ -8,7 +8,43 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800">
 
-    <Grid>
-        <Button Content="Go to main menu" Command="{s:Action GoToMainMenuCommand}" Margin="0,40,0,0" VerticalAlignment="Top"/>
+    <Grid Margin="0,10,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <GroupBox Header="Знакомство с компанией" Grid.Row="1" Margin="5,0,5,5">
+            <DataGrid x:Name="dgOrganizational" FontSize="16" FontWeight="Bold" Margin="5" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding CreationDate}" IsReadOnly="True" Header="Время" Width="180"/>
+                    <DataGridCheckBoxColumn Binding="{Binding IsDone, UpdateSourceTrigger=PropertyChanged}" Header=" " Width="80"/>
+                    <DataGridTextColumn Binding="{Binding Text}" IsReadOnly="True" Header="Задачи" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+
+        <GroupBox Header="Знакомство с проектом" Grid.Row="2" Margin="5">
+            <DataGrid x:Name="dgTechnical" FontSize="16" FontWeight="Bold" Margin="5" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding CreationDate}" IsReadOnly="True" Header="Время" Width="180"/>
+                    <DataGridCheckBoxColumn Binding="{Binding IsDone, UpdateSourceTrigger=PropertyChanged}" Header=" " Width="80"/>
+                    <DataGridTextColumn Binding="{Binding Text}" IsReadOnly="True" Header="Задачи" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+
+        <GroupBox Header="Знакомство с командой" Grid.Row="3" Margin="5">
+            <DataGrid x:Name="dgTraining" FontSize="16" FontWeight="Bold" Margin="5" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding CreationDate}" IsReadOnly="True" Header="Время" Width="180"/>
+                    <DataGridCheckBoxColumn Binding="{Binding IsDone, UpdateSourceTrigger=PropertyChanged}" Header=" " Width="80"/>
+                    <DataGridTextColumn Binding="{Binding Text}" IsReadOnly="True" Header="Задачи" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+        <Button Content="Go to main menu" Command="{s:Action GoToMainMenuCommand}" Margin="5,0,0,0" VerticalAlignment="Top" Height="28" Grid.RowSpan="2" HorizontalAlignment="Left" Width="118"/>
     </Grid>
 </UserControl>

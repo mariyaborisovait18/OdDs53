@@ -17,6 +17,11 @@ namespace OnboardingApp.ViewModels
         //переключение на главное меню
         public EventHandler<EventArgs> GoToMainMenuEventHandler;
 
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
         public void GoToMainMenuCommand()
         {
             GoToMainMenuEventHandler?.Invoke(this, EventArgs.Empty);

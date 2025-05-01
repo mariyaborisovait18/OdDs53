@@ -1,12 +1,13 @@
-﻿<Window
+﻿<UserControl
+    x:Class="OnboardingApp.Views.EmployersView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:local="clr-namespace:OnboardingApp.Views"
     xmlns:av="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:hc="https://handyorg.github.io/handycontrol"      
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="av"
-    Title="EmployeesView" Height="400" Width="400">
+    Height="400" Width="400">
 
     <Grid>
         <StackPanel Margin="10">
@@ -55,5 +56,5 @@
             </ListView>
         </StackPanel>
     </Grid>
-</Window>
+</UserControl>
 

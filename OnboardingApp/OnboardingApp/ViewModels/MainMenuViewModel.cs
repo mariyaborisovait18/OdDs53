@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace OnboardingApp.ViewModels
 {
@@ -39,6 +40,14 @@ namespace OnboardingApp.ViewModels
         public void GoToKnowlegeBaseCommand()
         {
             GoToKnowlegeBaseCommandEventHandler.Invoke(this, EventArgs.Empty);
+        }
+
+        //переключение с базы знаний обратно в меню        
+    public void OnGoToMainMenu(object sender, EventArgs e)
+        {
+            // Логика для отображения главного меню
+            Console.WriteLine("Вернуться в Главное Меню");
+            // Здесь добавьте код, чтобы показать главное меню в UI (например, переключить вид на главный интерфейс)
         }
     }
 }

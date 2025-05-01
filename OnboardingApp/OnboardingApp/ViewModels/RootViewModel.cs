@@ -46,11 +46,11 @@ namespace OnboardingApp.ViewModels
 
             //окна связанные с списком сотрудников
             _employersViewModel.GoToMainMenuEventHandler += OpenMainMenu;
-            _mainMenuViewModel.GoToEmployersCommandEventHandler += OpenOfficeMap;
+            _mainMenuViewModel.GoToEmployersCommandEventHandler += OpenEmployeesList;
 
             //окна связанные с базой знаний
             _knowlegeBaseViewModel.GoToMainMenuEventHandler += OpenMainMenu;
-            _mainMenuViewModel.GoToKnowlegeBaseCommandEventHandler += OpenOfficeMap;
+            _mainMenuViewModel.GoToKnowlegeBaseCommandEventHandler += OpenKnowlegeBase;
 
             //окна связанные с списком задач
             _tasksViewModel.GoToMainMenuEventHandler += OpenMainMenu;
@@ -69,6 +69,16 @@ namespace OnboardingApp.ViewModels
         public void OpenOfficeMap(object sender, EventArgs e)
         {
             ActiveItem = _officeMapViewModel;
+        }
+
+        public void OpenEmployeesList(object sender, EventArgs e)
+        {
+            ActiveItem = _employersViewModel;
+        }
+
+        public void OpenKnowlegeBase(object sender, EventArgs e)
+        {
+            ActiveItem = _knowlegeBaseViewModel;
         }
 
         public void Dispose()

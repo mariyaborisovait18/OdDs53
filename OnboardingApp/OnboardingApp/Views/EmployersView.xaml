@@ -7,26 +7,24 @@
     xmlns:av="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:hc="https://handyorg.github.io/handycontrol"      
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:s="https://github.com/canton7/Stylet"
-    Height="600" Width="600" Loaded="UserControl_Loaded">
+    xmlns:s="https://github.com/canton7/Stylet">
 
     <Grid>
-        <StackPanel>
-            <Button Content="Go to main menu" Command="{s:Action GoToMainMenuCommand}" Click="Button_Click_3"/>
-            <DataGrid x:Name="List" ItemsSource="{Binding Employees}" FontSize="16" FontWeight="Bold" Margin="10" AutoGenerateColumns="False" SelectionChanged="List_SelectionChanged" Height="68" Width="576">
+        <StackPanel Margin="10">
+            <Button Content="Вернуться в главное меню" Command="{s:Action GoToMainMenuCommand}" Click="Button_Click_3" 
+                    HorizontalAlignment="Stretch" Margin="0,0,0,10"/>
+            <DataGrid x:Name="List" ItemsSource="{Binding Employees}" FontSize="16" FontWeight="Bold" 
+                      AutoGenerateColumns="False" SelectionChanged="List_SelectionChanged" 
+                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Path=Text1}" IsReadOnly="False" Header="ID" Width="100"/>
-                    <DataGridTextColumn Binding="{Binding Path=Text2}" IsReadOnly="False" Header="Name" Width="180"/>
-                    <DataGridTextColumn Binding="{Binding Path=Text3}" IsReadOnly="False"  Header="Department" Width="*"/>
-
-
+                    <DataGridTextColumn Binding="{Binding Path=Text1}" IsReadOnly="False" Header="ID" Width="200"/>
+                    <DataGridTextColumn Binding="{Binding Path=Text2}" IsReadOnly="False" Header="Name" Width="200"/>
+                    <DataGridTextColumn Binding="{Binding Path=Text3}" IsReadOnly="False"  Header="Department" Width="180"/>
                 </DataGrid.Columns>
-
             </DataGrid>
-
-
         </StackPanel>
     </Grid>
 </UserControl>
+
 
 

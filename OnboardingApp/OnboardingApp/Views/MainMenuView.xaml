@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:hc="https://handyorg.github.io/handycontrol"
+      xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:s="https://github.com/canton7/Stylet"
       xmlns:local="clr-namespace:OnboardingApp.Views"
       mc:Ignorable="d" 
@@ -52,7 +53,7 @@
                     <Button Height="200" Width="350" Content="Карта офиса" Cursor="Hand" BorderBrush="Transparent" Background="Transparent" FontSize="20" Command="{s:Action GoToOfficeMapCommand}"/>
                 </Border>
                 <Border Height="140" Background="{DynamicResource DangerBrush}" Effect="{StaticResource EffectShadow1}" Margin="5">
-                    <Button Height="140" Width="350" Content="Список сотрудников" Cursor="Hand" BorderBrush="Transparent" Background="Transparent" FontSize="20" Command="{s:Action GoToEmployersCommand}"/>
+                    <Button Height="140" Width="350" Content="Список сотрудников" Cursor="Hand" BorderBrush="Transparent" Background="Transparent" FontSize="20" Command="{s:Action GoToEmployersCommand}" Click="Button_Click"/>
                 </Border>
                 <Border Height="100" Background="{DynamicResource SuccessBrush}" Effect="{StaticResource EffectShadow1}">
                     <Button Height="100" Width="350" Content="База знаний" Cursor="Hand" BorderBrush="Transparent" Background="Transparent" FontSize="20" Command="{s:Action GoToKnowlegeBaseCommand}"/>

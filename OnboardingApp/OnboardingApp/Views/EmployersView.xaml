@@ -8,53 +8,25 @@
     xmlns:hc="https://handyorg.github.io/handycontrol"      
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="https://github.com/canton7/Stylet"
-    
-    Height="400" Width="400">
+    Height="600" Width="600" Loaded="UserControl_Loaded">
 
     <Grid>
         <StackPanel>
-        <Button Content="Go to main menu" Command="{s:Action GoToMainMenuCommand}" Click="Button_Click"/>
-        <!-- Панель для ввода данных сотрудника -->
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                <TextBox Width="50" 
-                         md:HintAssist.Hint="Id"
-                         Style="{DynamicResource MaterialDesignOutlinedTextBox}"/>
-                <TextBox Width="100" 
-                         md:HintAssist.Hint="Фамилия"
-                         Style="{DynamicResource MaterialDesignOutlinedTextBox}" Text=""/>
-                <TextBox Width="130" 
-                         md:HintAssist.Hint="Отдел"
-                         Style="{DynamicResource MaterialDesignOutlinedTextBox}"/>
-                <Button Content="Добавить" 
-                        Command="{Binding AddEmployeeCommand}" 
-                        RenderTransformOrigin="0.5,0.5">
-                    <Button.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="-0.334"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Button.RenderTransform>
-                </Button>
-            </StackPanel>
+            <Button Content="Go to main menu" Command="{s:Action GoToMainMenuCommand}" Click="Button_Click_3"/>
+            <DataGrid x:Name="List" ItemsSource="{Binding Employees}" FontSize="16" FontWeight="Bold" Margin="10" AutoGenerateColumns="False" SelectionChanged="List_SelectionChanged" Height="68" Width="576">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Path=Text1}" IsReadOnly="False" Header="ID" Width="100"/>
+                    <DataGridTextColumn Binding="{Binding Path=Text2}" IsReadOnly="False" Header="Name" Width="180"/>
+                    <DataGridTextColumn Binding="{Binding Path=Text3}" IsReadOnly="False"  Header="Department" Width="*"/>
 
-            <!-- Список сотрудников -->
-            <ListView ItemsSource="{Binding Employees}" Height="248" Width="376">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Id}" Width="50"/>
-                            <TextBlock Width="100" Text="{Binding LastName}"/>
-                            <TextBlock Width="100" Text="{Binding Department}"/>
-                            <Button Content="Удалить" 
-                                    Command="{Binding DataContext.RemoveEmployeeCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"  
-                                    CommandParameter="{Binding}"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+
+                </DataGrid.Columns>
+
+            </DataGrid>
+
+
         </StackPanel>
     </Grid>
 </UserControl>
+
 

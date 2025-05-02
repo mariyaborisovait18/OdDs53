@@ -8,105 +8,64 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OnboardingApp.Models;
-
+using OnboardingApp.Services;
+using System.Windows.Documents;
+using HandyControl.Controls;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace OnboardingApp.ViewModels
 {
-    public class EmployersViewModel : Screen
+
+    public class EmployersViewModel : Screen, INotifyPropertyChanged // Реализуем INotifyPropertyChanged
     {
         //переключение на главное меню
         public EventHandler<EventArgs> GoToMainMenuEventHandler;
 
-        public void Dispose()
+        private BindableCollection<Employee> Employees = new();
+
+        private readonly string PATH = $"{Environment.CurrentDirectory}\\todoEmployee.json";
+
+        public EmployersViewModel()
         {
-            throw new NotImplementedException();
+            try
+            {
+                Employees = LoadText(PATH);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+        }
+
+        private BindableCollection<Employee> LoadText(string PATH)
+        {
+            var fileExists = File.Exists(PATH);
+            if (!fileExists)
+            {
+                File.CreateText(PATH).Dispose();
+                return new BindableCollection<Employee>();
+            }
+            using (var reader = File.OpenText(PATH))
+            {
+                var fileText = reader.ReadToEnd();
+                return JsonConvert.DeserializeObject<BindableCollection<Employee>>(fileText);
+            }
+
         }
 
         public void GoToMainMenuCommand()
         {
             GoToMainMenuEventHandler?.Invoke(this, EventArgs.Empty);
         }
-    }
-}
-public class EmployeesViewModel : INotifyPropertyChanged
-{
-    private ObservableCollection<Employee> _employees;
-    private string _name;
-    private string _department;
 
-    public ObservableCollection<Employee> Employees
-    {
-        get => _employees;
-        set
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
         {
-            _employees = value;
-            OnPropertyChanged(nameof(Employees));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-    }
-    public string Name
-    {
-        get => _name;
-        set
-        {
-            _name = value;
-            OnPropertyChanged(nameof(Name));
-            AddEmployeeCommand.RaiseCanExecuteChanged(); // Обновляем состояние команды при изменении имени
-        }
-    }
-
-    public string Department
-    {
-        get => _department;
-        set
-        {
-            _department = value;
-            OnPropertyChanged(nameof(Department));
-            AddEmployeeCommand.RaiseCanExecuteChanged(); // Обновляем состояние команды при изменении отдела
-        }
-    }
-
-    public RelayCommand AddEmployeeCommand { get; }
-    public RelayCommand<Employee> RemoveEmployeeCommand { get; }
-
-    public EmployeesViewModel()
-    {
-        Employees = new ObservableCollection<Employee>();
-        AddEmployeeCommand = new RelayCommand(AddEmployee, CanAddEmployee);
-        RemoveEmployeeCommand = new RelayCommand<Employee>(RemoveEmployee);
-    }
-
-    private void AddEmployee()
-    {
-        if (CanAddEmployee())
-        {
-            var newEmployeeId = Employees.Count > 0 ? Employees[^1].Id + 1 : 1; // Уникальный ID
-            Employees.Add(new Employee { Id = newEmployeeId, Name = Name, Department = Department });
-            Name = string.Empty; // Очистка имени после добавления
-            Department = string.Empty; // Очистка отдела после добавления
-        }
-    }
-
-
-
-
-    private bool CanAddEmployee()
-    {
-        return !string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Department);
-    }
-
-    private void RemoveEmployee(Employee employee)
-    {
-        if (employee != null)
-        {
-            Employees.Remove(employee);
-        }
-    }
-
-    public event PropertyChangedEventHandler PropertyChanged;
-
-    protected virtual void OnPropertyChanged(string propertyName)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }
 

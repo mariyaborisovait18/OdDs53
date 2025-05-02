@@ -12,8 +12,6 @@
 
     <Grid>
         <StackPanel Margin="10">
-            <!-- Кнопка для возврата в главное меню -->
-
             <!-- Панель для ввода данных сотрудника -->
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <TextBox Width="50" 
@@ -38,7 +36,7 @@
                     </Button.RenderTransform>
                 </Button>
             </StackPanel>
-            <Button Content="Go to main menu" Command="{s:Action GoToMainMenuCommand}" RenderTransformOrigin="0.5,0.5" Width="135">
+            <Button Content="Назад меню" Command="{s:Action GoToMainMenuCommand}" RenderTransformOrigin="0.5,0.5" Width="135">
                 <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="1"/>

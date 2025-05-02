@@ -45,6 +45,6 @@
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
-        <Button Content="Go to main menu" Command="{s:Action GoToMainMenuCommand}" Margin="5,0,0,0" VerticalAlignment="Top" Height="28" Grid.RowSpan="2" HorizontalAlignment="Left" Width="118"/>
+        <Button Content="Назад в меню" Command="{s:Action GoToMainMenuCommand}" Margin="5,0,0,0" VerticalAlignment="Top" Height="28" Grid.RowSpan="2" HorizontalAlignment="Left" Width="118"/>
     </Grid>
 </UserControl>

@@ -69,5 +69,15 @@ namespace OnboardingApp.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] todoDataList {
+            get {
+                object obj = ResourceManager.GetObject("todoDataList", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

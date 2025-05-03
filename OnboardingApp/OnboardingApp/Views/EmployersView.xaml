@@ -7,24 +7,40 @@
     xmlns:av="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:hc="https://handyorg.github.io/handycontrol"      
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:s="https://github.com/canton7/Stylet">
+    xmlns:s="https://github.com/canton7/Stylet"
+    Loaded="UserControl_Loaded">
 
     <Grid>
-        <StackPanel Margin="10">
-            <Button Content="Вернуться в главное меню" Command="{s:Action GoToMainMenuCommand}" Click="Button_Click_3" 
-                    HorizontalAlignment="Stretch" Margin="0,0,0,10"/>
-            <DataGrid x:Name="List" ItemsSource="{Binding Employees}" FontSize="16" FontWeight="Bold" 
-                      AutoGenerateColumns="False" SelectionChanged="List_SelectionChanged" 
-                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Path=Text1}" IsReadOnly="False" Header="ID" Width="200"/>
-                    <DataGridTextColumn Binding="{Binding Path=Text2}" IsReadOnly="False" Header="Name" Width="200"/>
-                    <DataGridTextColumn Binding="{Binding Path=Text3}" IsReadOnly="False"  Header="Department" Width="180"/>
-                </DataGrid.Columns>
-            </DataGrid>
-        </StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <!-- Для DataGrid -->
+            <ColumnDefinition Width="Auto"/>
+            <!-- Для кнопки -->
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <!-- Для DataGrid -->
+            <RowDefinition Height="Auto"/>
+            <!-- Для кнопки -->
+        </Grid.RowDefinitions>
+
+        <DataGrid x:Name="List" FontSize="16" FontWeight="Bold" Margin="10" AutoGenerateColumns="False" SelectionChanged="List_SelectionChanged" 
+                  Grid.Row="0" Grid.Column="0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Text1}" IsReadOnly="False" Header="ID" Width="180"/>
+                <DataGridTextColumn Binding="{Binding Text2}" IsReadOnly="False" Header="Name" Width="200"/>
+                <DataGridTextColumn Binding="{Binding Text3}" IsReadOnly="False" Header="Department" Width="180"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Content="Назад в меню" Command="{s:Action GoToMainMenuCommand}" Click="Button_Click_3" 
+                HorizontalAlignment="Stretch" Margin="500,25,20,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="28" Width="100.9633333333334"/>
     </Grid>
 </UserControl>
+
+
+
 
 
 

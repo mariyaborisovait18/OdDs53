@@ -36,7 +36,7 @@ namespace OnboardingApp.Views
         {
             InitializeComponent();
 
-            //Employees.CollectionChanged += _todoEmployee_ListChanged;
+            
 
         }
 
@@ -57,19 +57,18 @@ namespace OnboardingApp.Views
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            //_fileOServices = new FileOServices(PATH);
+            
             try
             {
-                //Employees = _fileOServices.LoadText();
+               
             }
             catch (Exception ex)
             {
-                //MessageBox.Show(ex.Message);
-                //Close();
+              
 
             }
 
-            //List.ItemsSource = Employees;
+            
         }
 
         private void Close()
@@ -79,19 +78,7 @@ namespace OnboardingApp.Views
 
         private void _todoEmployee_ListChanged(object? sender, ListChangedEventArgs e)
         {  
-           /* if (e.ListChangedType == ListChangedType.ItemAdded || e.ListChangedType == ListChangedType.ItemDeleted || e.ListChangedType == ListChangedType.ItemChanged)
-            {
-                try
-                {
-                    _fileOServices.SaveText(sender, PATH);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    Close();
-
-                }
-            }*/
+           
             
         }
 

@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <None Remove="Resources\map.html" />
-    <None Remove="Resources\todoDataList.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,9 +31,6 @@
   <ItemGroup>
     <Resource Include="Resources\map.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\todoDataList.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
 

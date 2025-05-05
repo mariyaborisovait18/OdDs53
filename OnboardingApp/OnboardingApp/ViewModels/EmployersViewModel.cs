@@ -16,43 +16,103 @@ using System.IO;
 
 namespace OnboardingApp.ViewModels
 {
-
-    public class EmployersViewModel : Screen, INotifyPropertyChanged // Реализуем INotifyPropertyChanged
+    public class EmployersViewModel : Screen, INotifyPropertyChanged
     {
-        //переключение на главное меню
         public EventHandler<EventArgs> GoToMainMenuEventHandler;
 
-        private BindableCollection<Employee> Employees = new();
+        private BindableCollection<Employee> _employees = new();
+        private readonly FileOServices _fileService = new();
+        private readonly string _path = $"{Environment.CurrentDirectory}\\todoEmployee.json";
 
-        private readonly string PATH = $"{Environment.CurrentDirectory}\\todoEmployee.json";
+        // Свойства для ввода нового сотрудника
+        private string _newEmployeeId;
+        private string _newEmployeeName;
+        private string _newEmployeeDepartment;
+
+        public string NewEmployeeId
+        {
+            get => _newEmployeeId;
+            set
+            {
+                _newEmployeeId = value;
+                OnPropertyChanged(nameof(NewEmployeeId));
+            }
+        }
+
+        public string NewEmployeeName
+        {
+            get => _newEmployeeName;
+            set
+            {
+                _newEmployeeName = value;
+                OnPropertyChanged(nameof(NewEmployeeName));
+            }
+        }
+
+        public string NewEmployeeDepartment
+        {
+            get => _newEmployeeDepartment;
+            set
+            {
+                _newEmployeeDepartment = value;
+                OnPropertyChanged(nameof(NewEmployeeDepartment));
+            }
+        }
 
         public EmployersViewModel()
         {
             try
             {
-                Employees = LoadText(PATH);
+                Employees = _fileService.LoadText(_path);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-
             }
         }
 
-        private BindableCollection<Employee> LoadText(string PATH)
+        public BindableCollection<Employee> Employees
         {
-            var fileExists = File.Exists(PATH);
-            if (!fileExists)
+            get => _employees;
+            set
             {
-                File.CreateText(PATH).Dispose();
-                return new BindableCollection<Employee>();
+                _employees = value;
+                OnPropertyChanged(nameof(Employees));
             }
-            using (var reader = File.OpenText(PATH))
-            {
-                var fileText = reader.ReadToEnd();
-                return JsonConvert.DeserializeObject<BindableCollection<Employee>>(fileText);
-            }
+        }
 
+        public void AddEmployee()
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(NewEmployeeId) && !string.IsNullOrWhiteSpace(NewEmployeeName) && !string.IsNullOrWhiteSpace(NewEmployeeDepartment))
+                {
+                    var newEmployee = new Employee { Text1 = NewEmployeeId, Text2 = NewEmployeeName, Text3 = NewEmployeeDepartment };
+                    Employees.Add(newEmployee);
+                    SaveEmployees();
+
+                    // Очистка полей после добавления
+                    NewEmployeeId = string.Empty;
+                    NewEmployeeName = string.Empty;
+                    NewEmployeeDepartment = string.Empty;
+                }
+                else
+                {
+                    MessageBox.Show("Пожалуйста, заполните все поля.");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Логирование или вывод сообщения об ошибке
+                MessageBox.Show($"Произошла ошибка: {ex.Message}");
+            }
+        }
+
+
+
+        private void SaveEmployees()
+        {
+            _fileService.SaveText(Employees, _path);
         }
 
         public void GoToMainMenuCommand()
@@ -68,6 +128,5 @@ namespace OnboardingApp.ViewModels
         }
     }
 }
-
 
 

@@ -71,10 +71,7 @@ namespace OnboardingApp.Views
             
         }
 
-        private void Close()
-        {
-            throw new NotImplementedException();
-        }
+        
 
         private void _todoEmployee_ListChanged(object? sender, ListChangedEventArgs e)
         {  
@@ -93,6 +90,11 @@ namespace OnboardingApp.Views
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
         {
 
         }

@@ -20,7 +20,8 @@ namespace OnboardingApp.ViewModels
     {
         public EventHandler<EventArgs> GoToMainMenuEventHandler;
 
-        private BindableCollection<Employee> _employees = new();
+        public BindableCollection<Employee> Employees { get; set; } = new();
+
         private readonly FileOServices _fileService = new();
         private readonly string _path = $"{Environment.CurrentDirectory}\\todoEmployee.json";
 
@@ -63,7 +64,7 @@ namespace OnboardingApp.ViewModels
         {
             try
             {
-                Employees = _fileService.LoadText(_path);
+                //Employees = _fileService.LoadText(_path);
             }
             catch (Exception ex)
             {
@@ -71,34 +72,31 @@ namespace OnboardingApp.ViewModels
             }
         }
 
-        public BindableCollection<Employee> Employees
-        {
-            get => _employees;
-            set
-            {
-                _employees = value;
-                OnPropertyChanged(nameof(Employees));
-            }
-        }
-
-        public void AddEmployee()
+        public void AddEmployeeCommand()
         {
             try
             {
-                if (!string.IsNullOrWhiteSpace(NewEmployeeId) && !string.IsNullOrWhiteSpace(NewEmployeeName) && !string.IsNullOrWhiteSpace(NewEmployeeDepartment))
+                if (string.IsNullOrEmpty(NewEmployeeId) || string.IsNullOrEmpty(NewEmployeeName) || string.IsNullOrEmpty(NewEmployeeDepartment))
                 {
-                    var newEmployee = new Employee { Text1 = NewEmployeeId, Text2 = NewEmployeeName, Text3 = NewEmployeeDepartment };
+                    MessageBox.Show("Пожалуйста, заполните все поля.");
+                   
+                }
+                else
+                {
+                    Employee newEmployee = new();
+
+                    newEmployee.Text1 = NewEmployeeId;
+                    newEmployee.Text2 = NewEmployeeName;
+                    newEmployee.Text3 = NewEmployeeDepartment;
+
                     Employees.Add(newEmployee);
+
                     SaveEmployees();
 
                     // Очистка полей после добавления
                     NewEmployeeId = string.Empty;
                     NewEmployeeName = string.Empty;
                     NewEmployeeDepartment = string.Empty;
-                }
-                else
-                {
-                    MessageBox.Show("Пожалуйста, заполните все поля.");
                 }
             }
             catch (Exception ex)

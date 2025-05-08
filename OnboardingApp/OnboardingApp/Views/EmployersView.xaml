@@ -8,60 +8,51 @@
     xmlns:hc="https://handyorg.github.io/handycontrol"      
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="https://github.com/canton7/Stylet"
-    Height="400" Width="400">
+    Loaded="UserControl_Loaded">
 
     <Grid>
-        <StackPanel Margin="10">
-            <!-- Панель для ввода данных сотрудника -->
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                <TextBox Width="50" 
-                         md:HintAssist.Hint="Id"
-                         Style="{DynamicResource MaterialDesignOutlinedTextBox}"/>
-                <TextBox Width="100" 
-                         md:HintAssist.Hint="Фамилия"
-                         Style="{DynamicResource MaterialDesignOutlinedTextBox}" Text=""/>
-                <TextBox Width="130" 
-                         md:HintAssist.Hint="Отдел"
-                         Style="{DynamicResource MaterialDesignOutlinedTextBox}"/>
-                <Button Content="Добавить" 
-                        Command="{Binding AddEmployeeCommand}" 
-                        RenderTransformOrigin="0.5,0.5">
-                    <Button.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="-0.334"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Button.RenderTransform>
-                </Button>
-            </StackPanel>
-            <Button Content="Назад меню" Command="{s:Action GoToMainMenuCommand}" RenderTransformOrigin="0.5,0.5" Width="135">
-                <Button.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleX="1"/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Button.RenderTransform>
-            </Button>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
 
-            <!-- Список сотрудников -->
-            <ListView ItemsSource="{Binding Employees}" Height="248" Width="376">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Id}" Width="50"/>
-                            <TextBlock Width="100" Text="{Binding LastName}"/>
-                            <TextBlock Width="100" Text="{Binding Department}"/>
-                            <Button Content="Удалить" 
-                                    Command="{Binding DataContext.RemoveEmployeeCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"  
-                                    CommandParameter="{Binding}"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <DataGrid ItemsSource="{Binding Employees}" x:Name="List" FontSize="16" FontWeight="Bold" Margin="10" AutoGenerateColumns="False" 
+                  SelectionChanged="List_SelectionChanged" Grid.Row="0" Grid.Column="0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Text1}" Header="ID" Width="180"/>
+                <DataGridTextColumn Binding="{Binding Text2}" Header="Name" Width="200"/>
+                <DataGridTextColumn Binding="{Binding Text3}" Header="Department" Width="180"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Margin="10">
+            <Grid Margin="5">
+                <TextBox x:Name="TextBoxID" Margin="0,20,0,0" Text="{Binding NewEmployeeId, Mode=TwoWay}"/>
+                <TextBlock Text="ID" VerticalAlignment="Top" Foreground="Gray" Margin="5,0,0,0"/>
+            </Grid>
+
+            <Grid Margin="5">
+                <TextBox x:Name="TextBoxName" Margin="0,20,0,0" Text="{Binding NewEmployeeName, Mode=TwoWay}"/>
+                <TextBlock Text="Name" VerticalAlignment="Top" Foreground="Gray" Margin="5,0,0,0"/>
+            </Grid>
+
+            <Grid Margin="5">
+                <TextBox x:Name="TextBoxDepartment" Margin="0,20,0,0" Text="{Binding NewEmployeeDepartment, Mode=TwoWay}"/>
+                <TextBlock Text="Department" VerticalAlignment="Top" Foreground="Gray" Margin="5,0,0,0"/>
+            </Grid>
+        </StackPanel>
+
+        <!-- Кнопки теперь находятся в верхней части правой колонки -->
+        <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Right">
+            <Button Content="Добавить сотрудника" Command="{s:Action AddEmployeeCommand}" 
+                    HorizontalAlignment="Stretch" Margin="5" Click="Button_Click_4"/>
+            <Button Content="Назад в меню" Command="{s:Action GoToMainMenuCommand}" 
+                    HorizontalAlignment="Stretch" Margin="5"/>
         </StackPanel>
     </Grid>
 </UserControl>

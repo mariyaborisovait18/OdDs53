@@ -8,104 +8,121 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OnboardingApp.Models;
-
+using OnboardingApp.Services;
+using System.Windows.Documents;
+using HandyControl.Controls;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace OnboardingApp.ViewModels
 {
-    public class EmployersViewModel : Screen
+    public class EmployersViewModel : Screen, INotifyPropertyChanged
     {
-        //переключение на главное меню
         public EventHandler<EventArgs> GoToMainMenuEventHandler;
 
-        public void Dispose()
+        public BindableCollection<Employee> Employees { get; set; } = new();
+
+        private readonly FileOServices _fileService = new();
+        private readonly string _path = $"{Environment.CurrentDirectory}\\todoEmployee.json";
+
+        // Свойства для ввода нового сотрудника
+        private string _newEmployeeId;
+        private string _newEmployeeName;
+        private string _newEmployeeDepartment;
+
+        public string NewEmployeeId
         {
-            throw new NotImplementedException();
+            get => _newEmployeeId;
+            set
+            {
+                _newEmployeeId = value;
+                OnPropertyChanged(nameof(NewEmployeeId));
+            }
+        }
+
+        public string NewEmployeeName
+        {
+            get => _newEmployeeName;
+            set
+            {
+                _newEmployeeName = value;
+                OnPropertyChanged(nameof(NewEmployeeName));
+            }
+        }
+
+        public string NewEmployeeDepartment
+        {
+            get => _newEmployeeDepartment;
+            set
+            {
+                _newEmployeeDepartment = value;
+                OnPropertyChanged(nameof(NewEmployeeDepartment));
+            }
+        }
+
+        public EmployersViewModel()
+        {
+            try
+            {
+                //Employees = _fileService.LoadText(_path);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        public void AddEmployeeCommand()
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(NewEmployeeId) || string.IsNullOrEmpty(NewEmployeeName) || string.IsNullOrEmpty(NewEmployeeDepartment))
+                {
+                    MessageBox.Show("Пожалуйста, заполните все поля.");
+
+                }
+                else
+                {
+                    Employee newEmployee = new();
+
+                    newEmployee.Text1 = NewEmployeeId;
+                    newEmployee.Text2 = NewEmployeeName;
+                    newEmployee.Text3 = NewEmployeeDepartment;
+
+                    Employees.Add(newEmployee);
+
+                    SaveEmployees();
+
+                    // Очистка полей после добавления
+                    NewEmployeeId = string.Empty;
+                    NewEmployeeName = string.Empty;
+                    NewEmployeeDepartment = string.Empty;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Логирование или вывод сообщения об ошибке
+                MessageBox.Show($"Произошла ошибка: {ex.Message}");
+            }
+        }
+
+
+
+        private void SaveEmployees()
+        {
+            _fileService.SaveText(Employees, _path);
         }
 
         public void GoToMainMenuCommand()
         {
             GoToMainMenuEventHandler?.Invoke(this, EventArgs.Empty);
         }
-    }
-}
-public class EmployeesViewModel : INotifyPropertyChanged
-{
-    private ObservableCollection<Employee> _employees;
-    private string _name;
-    private string _department;
 
-    public ObservableCollection<Employee> Employees
-    {
-        get => _employees;
-        set
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
         {
-            _employees = value;
-            OnPropertyChanged(nameof(Employees));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-    }
-    public string Name
-    {
-        get => _name;
-        set
-        {
-            _name = value;
-            OnPropertyChanged(nameof(Name));
-            AddEmployeeCommand.RaiseCanExecuteChanged(); // Обновляем состояние команды при изменении имени
-        }
-    }
-
-    public string Department
-    {
-        get => _department;
-        set
-        {
-            _department = value;
-            OnPropertyChanged(nameof(Department));
-            AddEmployeeCommand.RaiseCanExecuteChanged(); // Обновляем состояние команды при изменении отдела
-        }
-    }
-
-    public RelayCommand AddEmployeeCommand { get; }
-    public RelayCommand<Employee> RemoveEmployeeCommand { get; }
-
-    public EmployeesViewModel()
-    {
-        Employees = new ObservableCollection<Employee>();
-        AddEmployeeCommand = new RelayCommand(AddEmployee, CanAddEmployee);
-        RemoveEmployeeCommand = new RelayCommand<Employee>(RemoveEmployee);
-    }
-
-    private void AddEmployee()
-    {
-        if (CanAddEmployee())
-        {
-            var newEmployeeId = Employees.Count > 0 ? Employees[^1].Id + 1 : 1; // Уникальный ID
-            Employees.Add(new Employee { Id = newEmployeeId, Name = Name, Department = Department });
-            Name = string.Empty; // Очистка имени после добавления
-            Department = string.Empty; // Очистка отдела после добавления
-        }
-    }
-
-
-
-
-    private bool CanAddEmployee()
-    {
-        return !string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Department);
-    }
-
-    private void RemoveEmployee(Employee employee)
-    {
-        if (employee != null)
-        {
-            Employees.Remove(employee);
-        }
-    }
-
-    public event PropertyChangedEventHandler PropertyChanged;
-
-    protected virtual void OnPropertyChanged(string propertyName)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

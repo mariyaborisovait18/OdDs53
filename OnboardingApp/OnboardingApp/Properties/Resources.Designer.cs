@@ -69,5 +69,15 @@ namespace OnboardingApp.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] maps {
+            get {
+                object obj = ResourceManager.GetObject("maps", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

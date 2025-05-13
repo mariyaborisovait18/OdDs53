@@ -18,6 +18,7 @@
             </LinearGradientBrush>
         </Grid.Background>
 
+
         <Ellipse Width = "60" Height = "60" HorizontalAlignment = "Left" VerticalAlignment = "Top" Margin = "35,20,0,0" RenderTransformOrigin = "1.816,20.255">
             <Ellipse.Fill>
                 <RadialGradientBrush>
@@ -155,9 +156,8 @@
             </Ellipse.Fill>
         </Ellipse>
 
-
         <hc:ScrollViewer>
-            <hc:WaterfallPanel VerticalAlignment = "Center"  Groups = "{Binding Value,ElementName=UpDownGroups}" hc:PanelElement.FluidMoveBehavior = "{StaticResource BehaviorXY200}">
+            <hc:WaterfallPanel  Groups = "{Binding Value,ElementName=UpDownGroups}" hc:PanelElement.FluidMoveBehavior = "{StaticResource BehaviorXY200}" Width="796" RenderTransformOrigin="0.623,0.483" Height="364">
                 <hc:WaterfallPanel.Resources>
                     <Style TargetType = "Border">
                         <Setter Property = "RenderTransformOrigin" Value = "0.3,0.3" />
@@ -172,9 +172,9 @@
                                     <BeginStoryboard>
                                         <Storyboard>
                                             <DoubleAnimation Storyboard.TargetProperty = "RenderTransform.(ScaleTransform.ScaleX)"
-                                                             To = "1.05" Duration = "0:0:0.0" />
+                                                             To = "1.05" Duration = "0:0:0.2" />
                                             <DoubleAnimation Storyboard.TargetProperty = "RenderTransform.(ScaleTransform.ScaleY)"
-                                                             To = "1.05" Duration = "0:0:0.0" />
+                                                             To = "1.05" Duration = "0:0:0.2" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </Trigger.EnterActions>
@@ -182,9 +182,9 @@
                                     <BeginStoryboard>
                                         <Storyboard>
                                             <DoubleAnimation Storyboard.TargetProperty = "RenderTransform.(ScaleTransform.ScaleX)"
-                                                             To = "1" Duration = "0:0:0.0" />
+                                                             To = "1" Duration = "0:0:0.2" />
                                             <DoubleAnimation Storyboard.TargetProperty = "RenderTransform.(ScaleTransform.ScaleY)"
-                                                             To = "1" Duration = "0:0:0.0" />
+                                                             To = "1" Duration = "0:0:0.2" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </Trigger.ExitActions>
@@ -193,69 +193,76 @@
                     </Style>
                 </hc:WaterfallPanel.Resources>
 
-                <Border Width = "165" Height = "165" Effect = "{StaticResource EffectShadow1}" Margin = "185,-1,-359,5" CornerRadius = "90">
-                    <Border.Background>
-                        <RadialGradientBrush>
-                            <GradientStop Color = "#018ceb" Offset = "0.0" />
-                            <GradientStop Color = "#000000" Offset = "4.0" />
-                        </RadialGradientBrush>
-                    </Border.Background>
-                    <Button Height = "165" Width = "165" Cursor = "Hand" BorderBrush = "Transparent" Background = "Transparent" FontSize = "14" Command = "{s:Action GoToOfficeMapCommand}" FontFamily = "Arial Black">
-                        <TextBlock FontSize = "19" TextAlignment = "Center" FontFamily = "Agency FB" Foreground = "#FFFEFCFC">
-                            КАРТА
-                            <LineBreak />
-                            ОФИСА
-                        </TextBlock>
-                    </Button>
-                </Border>
-                
-                <Border Width = "165" Height = "165" Effect = "{StaticResource EffectShadow1}" Margin = "140,-1,0,-5" CornerRadius = "95">
-                    <Border.Background>
-                        <RadialGradientBrush>
-                            <GradientStop Color = "#112071" Offset = "2.0" />
-                            <GradientStop Color = "#FF1012C0" Offset = "0" />
-                        </RadialGradientBrush>
-                    </Border.Background>
-                    <Button Height = "165" Width = "165" Cursor = "Hand" BorderBrush = "Transparent" Background = "Transparent" FontSize = "14" Command = "{s:Action GoToEmployersCommand}" FontFamily = "Arial Black">
-                        <TextBlock FontSize = "19" TextAlignment = "Center" FontFamily = "Agency FB" Foreground = "#FFFEFCFC">
-                            СПИСОК
-                            <LineBreak />
-                            СОТРУДНИКОВ
-                        </TextBlock>
-                    </Button>
-                </Border>
+                <StackPanel Orientation="Vertical" Margin="324,0,-385,-1" Height="Auto" MinHeight="390">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Border Width = "165" Height = "165" Effect = "{StaticResource EffectShadow1}" Margin = "10" CornerRadius = "90">
+                            <Border.Background>
+                                <RadialGradientBrush>
+                                    <GradientStop Color = "#018ceb" Offset = "0.0" />
+                                    <GradientStop Color = "#000000" Offset = "4.0" />
+                                </RadialGradientBrush>
+                            </Border.Background>
+                            <Button Height = "165" Width = "165" Cursor = "Hand" BorderBrush = "Transparent" Background = "Transparent" FontSize = "14" Command = "{s:Action GoToOfficeMapCommand}" FontFamily = "Arial Black">
+                                <TextBlock FontSize = "19" TextAlignment = "Center" FontFamily = "Agency FB" Foreground = "#FFFEFCFC">
+                                    КАРТА
+                                    <LineBreak />
+                                    ОФИСА
+                                </TextBlock>
+                            </Button>
+                        </Border>
 
-                <Border Width = "165" Height = "165" Effect = "{StaticResource EffectShadow1}" Margin = "134,37,-9,5" CornerRadius = "95">
-                    <Border.Background>
-                        <RadialGradientBrush>
-                            <GradientStop Color = "#000" Offset = "4.0" />
-                            <GradientStop Color = "#13a6ad" Offset = "0" />
-                        </RadialGradientBrush>
-                    </Border.Background>
-                    <Button Height = "160" Width = "160" Cursor = "Hand" BorderBrush = "Transparent" Background = "Transparent" FontSize = "14" Command = "{s:Action GoToKnowlegeBaseCommand}" FontFamily = "Arial Black" HorizontalAlignment = "Stretch" VerticalAlignment = "Stretch">
-                        <TextBlock FontSize = "19" HorizontalAlignment = "Center" TextAlignment = "Center" FontFamily = "Agency FB" Foreground = "#FFFEFCFC">
-                            БАЗА
-                            <LineBreak />
-                            ЗНАНИЙ
-                        </TextBlock>
-                    </Button>
-                </Border>
+                        <Border Width = "165" Height = "165" Effect = "{StaticResource EffectShadow1}" Margin = "10" CornerRadius = "95">
+                            <Border.Background>
+                                <RadialGradientBrush>
+                                    <GradientStop Color = "#112071" Offset = "2.0" />
+                                    <GradientStop Color = "#FF1012C0" Offset = "0" />
+                                </RadialGradientBrush>
+                            </Border.Background>
+                            <Button Height = "165" Width = "165" Cursor = "Hand" BorderBrush = "Transparent" Background = "Transparent" FontSize = "14" Command = "{s:Action GoToEmployersCommand}" FontFamily = "Arial Black">
+                                <TextBlock FontSize = "19" TextAlignment = "Center" FontFamily = "Agency FB" Foreground = "#FFFEFCFC">
+                                    СПИСОК
+                                    <LineBreak />
+                                    СОТРУДНИКОВ
+                                </TextBlock>
+                            </Button>
+                        </Border>
+                    </StackPanel>
 
-                <Border Width = "165" Height = "165" Effect = "{StaticResource EffectShadow1}" Margin = "-260,24,-804,-5" CornerRadius = "100">
-                    <Border.Background>
-                        <RadialGradientBrush>
-                            <GradientStop Color = "#FFFF9300" Offset = "0.0" />
-                            <GradientStop Color = "#FF303030" Offset = "2.0" />
-                        </RadialGradientBrush>
-                    </Border.Background>
-                    <Button Height = "165" Width = "165" Cursor = "Hand" BorderBrush = "Transparent" Background = "Transparent" FontSize = "14" Command = "{s:Action GoToTasksCommand}" FontFamily = "Arial Black">
-                        <TextBlock FontSize = "19" HorizontalAlignment = "Center" VerticalAlignment = "Center" TextAlignment = "Center" FontFamily = "Agency FB" Foreground = "Black">
-                            ТЕКУЩИЕ
-                            <LineBreak />
-                            ЗАДАЧИ
-                        </TextBlock>
-                    </Button>
-                </Border>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Border Width = "165" Height = "165" Effect = "{StaticResource EffectShadow1}" Margin = "10" CornerRadius = "95">
+                            <Border.Background>
+                                <RadialGradientBrush>
+                                    <GradientStop Color = "#000" Offset = "4.0" />
+                                    <GradientStop Color = "#13a6ad" Offset = "0" />
+                                </RadialGradientBrush>
+                            </Border.Background>
+                            <Button Height = "160" Width = "160" Cursor = "Hand" BorderBrush = "Transparent" Background = "Transparent" FontSize = "14" Command = "{s:Action GoToKnowlegeBaseCommand}" FontFamily = "Arial Black" HorizontalAlignment = "Stretch" VerticalAlignment = "Stretch">
+                                <TextBlock FontSize = "19" HorizontalAlignment = "Center" TextAlignment = "Center" FontFamily = "Agency FB" Foreground = "#FFFEFCFC">
+                                    БАЗА
+                                    <LineBreak />
+                                    ЗНАНИЙ
+                                </TextBlock>
+                            </Button>
+                        </Border>
+
+                        <Border Width = "165" Height = "165" Effect = "{StaticResource EffectShadow1}" Margin = "10" CornerRadius = "95">
+                            <Border.Background>
+                                <RadialGradientBrush>
+                                    <GradientStop Color = "#FFFF9300" Offset = "0.0" />
+                                    <GradientStop Color = "#FF303030" Offset = "2.0" />
+                                </RadialGradientBrush>
+                            </Border.Background>
+                            <Button Height = "165" Width = "165" Cursor = "Hand" BorderBrush = "Transparent" Background = "Transparent" FontSize = "14" Command = "{s:Action GoToTasksCommand}" FontFamily = "Arial Black">
+                                <TextBlock FontSize = "19" HorizontalAlignment = "Center" VerticalAlignment = "Center" TextAlignment = "Center" FontFamily = "Agency FB" Foreground = "Black">
+                                    ТЕКУЩИЕ
+                                    <LineBreak />
+                                    ЗАДАЧИ
+                                </TextBlock>
+                            </Button>
+                        </Border>
+                    </StackPanel>
+
+                </StackPanel>
             </hc:WaterfallPanel>
         </hc:ScrollViewer>
 

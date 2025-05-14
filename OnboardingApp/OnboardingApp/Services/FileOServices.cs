@@ -45,5 +45,9 @@ namespace OnboardingApp.Services
             }
         }
 
+        internal void SaveData(List<Employee> employees, string path)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

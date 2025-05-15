@@ -34,7 +34,7 @@ namespace OnboardingApp.ViewModels
         }
 
         //переключение на базу знаний
-        public EventHandler<EventArgs> GoToKnowlegeBaseCommandEventHandler;
+        public EventHandler<EventArgs>? GoToKnowlegeBaseCommandEventHandler;
 
         public void GoToKnowlegeBaseCommand()
         {

@@ -11,7 +11,8 @@
     Loaded="UserControl_Loaded">
 
     <ScrollViewer>
-        <Grid>
+        <Grid Background="White">
+            <!-- Устанавливаем белый фон -->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*">
                     <!-- Занимает оставшееся пространство -->
@@ -51,6 +52,7 @@
         </Grid>
     </ScrollViewer>
 </UserControl>
+
 
 
 

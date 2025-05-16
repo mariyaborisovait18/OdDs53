@@ -12,37 +12,35 @@
 
     <ScrollViewer>
         <Grid Background="White">
-            <!-- Устанавливаем белый фон -->
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*">
-                    <!-- Занимает оставшееся пространство -->
-                </ColumnDefinition>
-                <ColumnDefinition Width="200">
-                    <!-- Фиксированная ширина для правой колонки -->
-                </ColumnDefinition>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="*">
-                    <!-- Занимает оставшееся пространство -->
-                </RowDefinition>
-                <RowDefinition Height="Auto">
-                    <!-- У автоматической высоты -->
-                </RowDefinition>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <!-- Поле для поиска по должности помещено в верхнюю правую часть -->
             <StackPanel Orientation="Vertical" Margin="10" Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right">
                 <TextBox Width="178" 
                          Text="{Binding PositionSearchText, UpdateSourceTrigger=PropertyChanged}" 
-                         hc:InfoElement.Placeholder="Поиск по должности..." FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSizeKey}}"/>
+                         hc:InfoElement.Placeholder="Поиск по должности..." 
+                         FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSizeKey}}"
+                         Background="White" Foreground="Black"/>
+                <!-- Установлен белый фон и черный текст -->
                 <Button Content="Назад в меню"
                         Command="{s:Action GoToMainMenuCommand}" 
-                        HorizontalAlignment="Stretch" Margin="5"/>
+                        HorizontalAlignment="Stretch" Margin="5"
+                        Background="White" Foreground="Black"/>
+                <!-- Установлен белый фон и черный текст -->
             </StackPanel>
 
             <DataGrid ItemsSource="{Binding FilteredEmployees}" x:Name="List" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSizeKey}}" FontWeight="Bold" Margin="10" AutoGenerateColumns="False" 
-                      SelectionChanged="List_SelectionChanged" Grid.Row="0" Grid.Column="0">
+                      SelectionChanged="List_SelectionChanged" Grid.Row="0" Grid.Column="0"
+                      Background="White" Foreground="Black">
+                <!-- Установлен белый фон и черный текст -->
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Text1}" Header="Должность" Width="*"/>
                     <DataGridTextColumn Binding="{Binding Text2}" Header="ФИО" Width="*"/>
@@ -52,6 +50,7 @@
         </Grid>
     </ScrollViewer>
 </UserControl>
+
 
 
 

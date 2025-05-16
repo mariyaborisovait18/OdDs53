@@ -28,7 +28,9 @@
                          Text="{Binding PositionSearchText, UpdateSourceTrigger=PropertyChanged}" 
                          hc:InfoElement.Placeholder="Поиск по должности..." 
                          FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSizeKey}}"
-                         Background="White" Foreground="Black"/>
+                         Background="White" Foreground="Black"
+                         CaretBrush="Black"/>
+                <!-- Установлен цвет курсора на черный -->
                 <Button Content="Назад в меню"
                         Command="{s:Action GoToMainMenuCommand}" 
                         HorizontalAlignment="Stretch" Margin="5"

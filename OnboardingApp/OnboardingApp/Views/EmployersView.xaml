@@ -40,7 +40,13 @@
                       Background="White" Foreground="Black">
 
                 <DataGrid.Resources>
+                    <!-- Стиль для ячеек -->
                     <Style TargetType="DataGridCell">
+                        <Setter Property="Background" Value="White"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                    </Style>
+                    <!-- Стиль для строк -->
+                    <Style TargetType="DataGridRow">
                         <Setter Property="Background" Value="White"/>
                         <Setter Property="Foreground" Value="Black"/>
                     </Style>
@@ -55,6 +61,7 @@
         </Grid>
     </ScrollViewer>
 </UserControl>
+
 
 
 

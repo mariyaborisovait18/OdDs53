@@ -58,7 +58,7 @@
             <Grid Width="300">
                 <TextBox Background="White" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" x:Name="SearchTextBox" VerticalAlignment="Center" Foreground="Black" 
                          CaretBrush="Black" BorderBrush="Black" Height="28"/>
-                <TextBlock Text="Поиск..." Foreground="Gray" 
+                <TextBlock Text=" " Foreground="Gray" 
                            VerticalAlignment="Center" Margin="5,0,0,0" 
                            IsHitTestVisible="False" 
                            Visibility="{Binding SearchText, Converter={StaticResource StringToVisibilityConverter}}"/>

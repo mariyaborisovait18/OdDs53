@@ -13,7 +13,6 @@ using System.Windows.Documents;
 using HandyControl.Controls;
 using Newtonsoft.Json;
 using System.IO;
-
 using Stylet;
 using System;
 using System.Linq;

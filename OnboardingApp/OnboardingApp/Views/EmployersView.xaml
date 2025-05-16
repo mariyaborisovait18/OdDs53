@@ -50,6 +50,11 @@
                         <Setter Property="Background" Value="White"/>
                         <Setter Property="Foreground" Value="Black"/>
                     </Style>
+                    <!-- Стиль для заголовков столбцов -->
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="White"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                    </Style>
                 </DataGrid.Resources>
 
                 <DataGrid.Columns>
@@ -61,6 +66,7 @@
         </Grid>
     </ScrollViewer>
 </UserControl>
+
 
 
 

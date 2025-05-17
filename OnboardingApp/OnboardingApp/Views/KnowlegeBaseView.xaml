@@ -80,8 +80,8 @@
                   SelectionChanged="ArticlesDataGrid_SelectionChanged"
                   ItemsSource="{Binding FilteredArticles}" 
                   AutoGenerateColumns="False" 
-                  Margin="10,10,10,10" IsReadOnly="True" Grid.ColumnSpan="3" Grid.RowSpan="2"
-                  BorderBrush="Black">
+                  Margin="10,10,10,10" IsReadOnly="True" Grid.ColumnSpan="3"
+                  BorderBrush="Black" Grid.RowSpan="2">
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
                     <Setter Property="Background" Value="White"/>
@@ -94,6 +94,7 @@
                     <Setter Property="Background" Value="White"/>
                     <Setter Property="Foreground" Value="Black"/>
                 </Style>
+
             </DataGrid.ColumnHeaderStyle>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Название" Binding="{Binding Title}" Width="*" Foreground="Black"/>
@@ -101,5 +102,12 @@
                 <DataGridTextColumn Header="Дата" Binding="{Binding CreatedDate, StringFormat=d}" Width="Auto" Foreground="Black"/>
             </DataGrid.Columns>
         </DataGrid>
+        <!-- Кнопки для открытия PDF файлов -->
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.ColumnSpan="3" Margin="10">
+            <Button Content="Открыть Инструкцию" Command="{Binding OpenInstructionCommand}" Margin="5"/>
+            <Button Content="Открыть Правила" Command="{Binding OpenRulesCommand}" Margin="5"/>
+        </StackPanel>
+
     </Grid>
+
 </UserControl>

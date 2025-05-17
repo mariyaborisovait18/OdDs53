@@ -1,0 +1,16 @@
+﻿<Window x:Class="OnboardingApp.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Учебники по C++" Height="300" Width="400">
+    <Grid>
+        <StackPanel Margin="10">
+            <ListBox Name="BookList" Height="200">
+                <ListBoxItem Content="Учебник по C++ - Глава 1" Tag="Resources/PDF/учебник_с++_Глава_1.pdf"/>
+                <ListBoxItem Content="Учебник по C++ - Глава 2" Tag="Resources/PDF/учебник_с++_Глава_2.pdf"/>
+                <!-- Добавьте другие учебники здесь -->
+            </ListBox>
+            <Button Content="Скачать" Click="DownloadButton_Click" Margin="0,10,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>
+

@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Windows;
 using System.Collections.Generic;
 using System.Linq;
+using System.Diagnostics; // Для Process
+using System.IO;         // Для Path
 using System.Text;
 using System.Threading.Tasks;
-
 
 public class ArticleRepository : IArticleRepository
 {
@@ -11,11 +13,11 @@ public class ArticleRepository : IArticleRepository
 
     public ArticleRepository()
     {
-        // Здесь вы можете заполнить свои статьи
+        // Заполнение списка с правильной инициализацией
         _articles = new List<Article>
         {
-            new Article { Title = "Инструкция 1", Category = "Инструкции", CreatedDate = DateTime.Now, PdfFilePath = "path/to/document1.pdf" },
-            new Article { Title = "Правила 1", Category = "Правила", CreatedDate = DateTime.Now, PdfFilePath = "path/to/document2.pdf" },
+            new Article("Инструкция 1", "Инструкции") { PdfFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resources", "PDF", "Учебник по с++ Стефан Р. Дэвис.pdf") },
+            new Article("Правила 1", "Правила") { PdfFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resources", "PDF", "Учебник по с# М.А.Медведев.pdf") },
             // добавьте другие статьи
         };
     }
@@ -23,5 +25,26 @@ public class ArticleRepository : IArticleRepository
     public IEnumerable<Article> GetAllArticles()
     {
         return _articles;
+    }
+
+    public void AddArticle(Article article)
+    {
+        _articles.Add(article);
+    }
+
+    public void RemoveArticle(Article article)
+    {
+        _articles.Remove(article);
+    }
+
+    public void UpdateArticle(Article article)
+    {
+        var existingArticle = _articles.FirstOrDefault(a => a.Title == article.Title);
+        if (existingArticle != null)
+        {
+            existingArticle.Category = article.Category;
+            existingArticle.CreatedDate = article.CreatedDate;
+            existingArticle.PdfFilePath = article.PdfFilePath;
+        }
     }
 }

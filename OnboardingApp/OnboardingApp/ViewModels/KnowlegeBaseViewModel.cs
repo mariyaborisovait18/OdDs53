@@ -15,6 +15,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using OnboardingApp.Models;
+using System.IO;
+using System.Windows;
+using System.Diagnostics;
 
 
 namespace OnboardingApp.ViewModels
@@ -53,7 +56,8 @@ namespace OnboardingApp.ViewModels
         }
 
         public ICommand RefreshCommand { get; }
-        //
+        public ICommand OpenInstructionCommand { get; }
+        public ICommand OpenRulesCommand { get; }
         public ICommand GoToMainMenuCommand { get; }
 
         public EventHandler<EventArgs> GoToMainMenuEventHandler;
@@ -78,9 +82,11 @@ namespace OnboardingApp.ViewModels
             RefreshCommand = new RelayCommand(_ => RefreshFilteredArticles());
             //
             GoToMainMenuCommand = new RelayCommand(_ => GoToMainMenu());
-
-
+            // Новый: Команды для открытия PDF
+            OpenInstructionCommand = new RelayCommand(_ => OpenPdf("Учебник по с++ Стефан Р. Дэвис.pdf"));
+            OpenRulesCommand = new RelayCommand(_ => OpenPdf("Учебник по с шарп М.А.Медведев.pdf"));
         }
+
 
         private void RefreshFilteredArticles()
         {
@@ -103,6 +109,29 @@ namespace OnboardingApp.ViewModels
                 FilteredArticles.Add(article);
             }
         }
+
+        private void OpenPdf(string filename)
+        {
+            try
+            {
+                string pdfFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resources", "PDF", filename);
+
+                if (File.Exists(pdfFilePath))
+                {
+                    System.Diagnostics.Process.Start(new ProcessStartInfo(pdfFilePath) { UseShellExecute = true });
+                }
+                else
+                {
+                    MessageBox.Show("PDF файл не найден: " + pdfFilePath);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при открытии файла: " + ex.Message);
+            }
+        }
+
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)

@@ -10,49 +10,61 @@
     xmlns:s="https://github.com/canton7/Stylet"
     Loaded="UserControl_Loaded">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="200"/>
-        </Grid.ColumnDefinitions>
+    <ScrollViewer>
+        <Grid Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-        <DataGrid ItemsSource="{Binding Employees}" x:Name="List" FontSize="16" FontWeight="Bold" Margin="10" AutoGenerateColumns="False" 
-                  SelectionChanged="List_SelectionChanged" Grid.Row="0" Grid.Column="0">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Text1}" Header="ID" Width="180"/>
-                <DataGridTextColumn Binding="{Binding Text2}" Header="Name" Width="200"/>
-                <DataGridTextColumn Binding="{Binding Text3}" Header="Department" Width="180"/>
-            </DataGrid.Columns>
-        </DataGrid>
+            <!-- Поле для поиска по должности помещено в верхнюю правую часть -->
+            <StackPanel Orientation="Vertical" Margin="10" Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right">
+                <TextBox Width="178" 
+                         Text="{Binding PositionSearchText, UpdateSourceTrigger=PropertyChanged}" 
+                         hc:InfoElement.Placeholder="Поиск по должности..." 
+                         FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSizeKey}}"
+                         Background="White" Foreground="Black"
+                         CaretBrush="Black"/>
+                <!-- Установлен цвет курсора на черный -->
+                <Button Content="Назад в меню"
+                        Command="{s:Action GoToMainMenuCommand}" 
+                        HorizontalAlignment="Stretch" Margin="5"
+                        Background="White" Foreground="Black"/>
+            </StackPanel>
 
-        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Margin="10">
-            <Grid Margin="5">
-                <TextBox x:Name="TextBoxID" Margin="0,20,0,0" Text="{Binding NewEmployeeId, Mode=TwoWay}"/>
-                <TextBlock Text="ID" VerticalAlignment="Top" Foreground="Gray" Margin="5,0,0,0"/>
-            </Grid>
+            <DataGrid ItemsSource="{Binding FilteredEmployees}" x:Name="List" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSizeKey}}" FontWeight="Bold" Margin="10" AutoGenerateColumns="False" 
+                      SelectionChanged="List_SelectionChanged" Grid.Row="0" Grid.Column="0"
+                      Background="White" Foreground="Black">
 
-            <Grid Margin="5">
-                <TextBox x:Name="TextBoxName" Margin="0,20,0,0" Text="{Binding NewEmployeeName, Mode=TwoWay}"/>
-                <TextBlock Text="Name" VerticalAlignment="Top" Foreground="Gray" Margin="5,0,0,0"/>
-            </Grid>
+                <DataGrid.Resources>
+                    <!-- Стиль для ячеек -->
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="Background" Value="White"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                    </Style>
+                    <!-- Стиль для строк -->
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="Background" Value="White"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                    </Style>
+                    <!-- Стиль для заголовков столбцов -->
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="White"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                    </Style>
+                </DataGrid.Resources>
 
-            <Grid Margin="5">
-                <TextBox x:Name="TextBoxDepartment" Margin="0,20,0,0" Text="{Binding NewEmployeeDepartment, Mode=TwoWay}"/>
-                <TextBlock Text="Department" VerticalAlignment="Top" Foreground="Gray" Margin="5,0,0,0"/>
-            </Grid>
-        </StackPanel>
-
-        <!-- Кнопки теперь находятся в верхней части правой колонки -->
-        <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Right">
-            <Button Content="Добавить сотрудника" Command="{s:Action AddEmployeeCommand}" 
-                    HorizontalAlignment="Stretch" Margin="5" Click="Button_Click_4"/>
-            <Button Content="Назад в меню" Command="{s:Action GoToMainMenuCommand}" 
-                    HorizontalAlignment="Stretch" Margin="5"/>
-        </StackPanel>
-    </Grid>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Text1}" Header="Должность" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding Text2}" Header="ФИО" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding Text3}" Header="Отдел" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </ScrollViewer>
 </UserControl>

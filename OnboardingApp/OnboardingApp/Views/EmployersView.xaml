@@ -40,6 +40,13 @@
             <DataGrid ItemsSource="{Binding FilteredEmployees}" x:Name="List" FontSize="{DynamicResource {x:Static SystemFonts.MessageFontSizeKey}}" FontWeight="Bold" Margin="10" AutoGenerateColumns="False" 
                       SelectionChanged="List_SelectionChanged" Grid.Row="0" Grid.Column="0"
                       Background="White" Foreground="Black">
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="Background" Value="White"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="BorderBrush" Value="LightGray"/>
+                    </Style>
+                </DataGrid.CellStyle>
 
                 <DataGrid.Resources>
                     <!-- Стиль для ячеек -->

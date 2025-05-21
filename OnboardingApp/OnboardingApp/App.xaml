@@ -15,8 +15,8 @@
 
                 <hc:Theme />
 
-
             </s:ApplicationLoader.MergedDictionaries>
         </s:ApplicationLoader>
     </Application.Resources>
 </Application>
+

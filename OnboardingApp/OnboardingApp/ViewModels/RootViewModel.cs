@@ -40,20 +40,46 @@ namespace OnboardingApp.ViewModels
             _officeMapViewModel = officeMapViewModel;
             _tasksViewModel = tasksViewModel;
 
+            //окна связанные с картой офиса
+            _officeMapViewModel.GoToMainMenuEventHandler += OpenMainMenu;
+            _mainMenuViewModel.GoToOfficeMapCommandEventHandler += OpenOfficeMap;
+
+            //окна связанные с списком сотрудников
+            _employersViewModel.GoToMainMenuEventHandler += OpenMainMenu;
+            _mainMenuViewModel.GoToEmployersCommandEventHandler += OpenEmployeesList;
+
+            //окна связанные с базой знаний
+            _knowlegeBaseViewModel.GoToMainMenuEventHandler += OpenMainMenu;
+            _mainMenuViewModel.GoToKnowlegeBaseCommandEventHandler += OpenKnowlegeBase;
+
+            //окна связанные с списком задач
+            _tasksViewModel.GoToMainMenuEventHandler += OpenMainMenu;
+            _mainMenuViewModel.GoToTasksCommandEventHandler += OpenOfficeMap;
+
+
             ActiveItem = mainMenuViewModel;
 
         }
 
-        public void OpenMap()
+        public void OpenMainMenu(object sender, EventArgs e)
+        {
+            ActiveItem = _mainMenuViewModel;
+        }
+
+        public void OpenOfficeMap(object sender, EventArgs e)
         {
             ActiveItem = _officeMapViewModel;
         }
 
-        public void SetTextCommand()
+        public void OpenEmployeesList(object sender, EventArgs e)
         {
-            Text = "Дата и время: " + DateTime.Now.ToString();
+            ActiveItem = _employersViewModel;
         }
 
+        public void OpenKnowlegeBase(object sender, EventArgs e)
+        {
+            ActiveItem = _knowlegeBaseViewModel;
+        }
 
         public void Dispose()
         {

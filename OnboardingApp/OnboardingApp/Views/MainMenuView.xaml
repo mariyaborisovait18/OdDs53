@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:hc="https://handyorg.github.io/handycontrol"
+      xmlns:s="https://github.com/canton7/Stylet"
       xmlns:local="clr-namespace:OnboardingApp.Views"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800">
@@ -48,19 +49,16 @@
                 </hc:WaterfallPanel.Resources>
                 
                 <Border Height="200" Background="{DynamicResource PrimaryBrush}" Effect="{StaticResource EffectShadow1}" Margin="5">
-                    <TextBlock Text="Карта офиса" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
+                    <Button Height="200" Width="350" Content="Карта офиса" Cursor="Hand" BorderBrush="Transparent" Background="Transparent" FontSize="20" Command="{s:Action GoToOfficeMapCommand}"/>
                 </Border>
                 <Border Height="140" Background="{DynamicResource DangerBrush}" Effect="{StaticResource EffectShadow1}" Margin="5">
-                    <TextBlock Text="Список сотрудников" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
+                    <Button Height="140" Width="350" Content="Список сотрудников" Cursor="Hand" BorderBrush="Transparent" Background="Transparent" FontSize="20" Command="{s:Action GoToEmployersCommand}"/>
                 </Border>
-                <Border Height="100" Background="{DynamicResource SuccessBrush}" Effect="{StaticResource EffectShadow1}" Margin="5">
-                    <TextBlock Text="База знаний" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
+                <Border Height="100" Background="{DynamicResource SuccessBrush}" Effect="{StaticResource EffectShadow1}" Width="387">
+                    <Button Height="100" Width="388" Content="База знаний" Cursor="Hand" BorderBrush="Transparent" Background="Transparent" FontSize="20" Command="{s:Action GoToKnowlegeBaseCommand}"/>
                 </Border>
                 <Border Height="170" Background="{DynamicResource InfoBrush}" Effect="{StaticResource EffectShadow1}" Margin="5">
-                    <TextBlock Text="Текущие задачи" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
-                </Border>
-                <Border Height="100" Background="{DynamicResource WarningBrush}" Effect="{StaticResource EffectShadow1}" Margin="5">
-                    <TextBlock Text="ContentDemoStr" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
+                    <Button Height="170" Width="350" Content="Текущие задачи" Cursor="Hand" BorderBrush="Transparent" Background="Transparent" FontSize="20" Command="{s:Action GoToTasksCommand}"/>
                 </Border>
             </hc:WaterfallPanel>
         </hc:ScrollViewer>

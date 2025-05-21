@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:pdf="clr-namespace:BitMiracle.Docotic.Pdf;assembly=BitMiracle.Docotic.Pdf"
         xmlns:converters="clr-namespace:OnboardingApp.Converters"
+      xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:s="https://github.com/canton7/Stylet"
         xmlns:syncfusion="clr-namespace:Syncfusion.Windows.PdfViewer;assembly=Syncfusion.PdfViewer.WPF"
         xmlns:vm="clr-namespace:OnboardingApp.ViewModels" 
         xmlns:local="clr-namespace:OnboardingApp"
@@ -42,6 +44,7 @@
             <ColumnDefinition Width="542*"/>
             <ColumnDefinition Width="133*"/>
             <ColumnDefinition Width="112*"/>
+            <ColumnDefinition Width="112*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" MinHeight="32"/>
@@ -50,7 +53,7 @@
             <RowDefinition Height="69*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="База знаний" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="29,0,0,0" Height="32" Width="134" Foreground="Black"/>
+        <TextBlock Text=" " FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="29,0,0,0" Height="32" Width="134" Foreground="Black"/>
 
         <!-- Поиск и фильтрация-->
         <StackPanel Background="White" Orientation="Horizontal" Margin="10,10,10,10" Grid.Row="1" Grid.ColumnSpan="3">
@@ -67,20 +70,20 @@
             <ComboBox Background="White" Foreground="Black" ItemsSource="{Binding Categories}" 
                       SelectedItem="{Binding SelectedCategory, Mode=TwoWay}" Width="154" Margin="10,0,0,0" Height="28" VerticalAlignment="Center" 
                       BorderBrush="Black"/>
-            <!-- Кнопка "Поиск" -->
-            <Button Background="White" Content="Поиск" Foreground="Black" Command="{Binding RefreshCommand}" Margin="5,0,0,0" Width="83" Height="30" VerticalAlignment="Center"
-                    BorderBrush="Black"/>
+           
             <!--Кнопка "обратно в меню"-->
             <Button Background="White" Foreground="Black" Content="Назад в меню" Command="{Binding GoToMainMenuCommand}" Margin="10" HorizontalAlignment="Left"
                     BorderBrush="Black"/>
         </StackPanel>
 
         <!-- DataGrid с данными -->
+
         <DataGrid Background="White" Foreground="Black" x:Name="ArticlesDataGrid" Grid.Row="2" 
-                  SelectionChanged="ArticlesDataGrid_SelectionChanged"
-                  ItemsSource="{Binding FilteredArticles}" 
+                  ItemsSource="{Binding FilteredArticles}"
+                  SelectedItem="{Binding SelectedArticle}"
+                  SelectionChanged="{s:Action SelectedArticleChangedCommand}"
                   AutoGenerateColumns="False" 
-                  Margin="10,10,10,10" IsReadOnly="True" Grid.ColumnSpan="3"
+                  Margin="10,10,10,10" IsReadOnly="True" Grid.ColumnSpan="4"
                   BorderBrush="Black" Grid.RowSpan="2">
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
@@ -102,11 +105,6 @@
                 <DataGridTextColumn Header="Дата" Binding="{Binding CreatedDate, StringFormat=d}" Width="Auto" Foreground="Black"/>
             </DataGrid.Columns>
         </DataGrid>
-        <!-- Кнопки для открытия PDF файлов -->
-        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.ColumnSpan="3" Margin="10">
-            <Button Content="Открыть Инструкцию" Command="{Binding OpenInstructionCommand}" Margin="5"/>
-            <Button Content="Открыть Правила" Command="{Binding OpenRulesCommand}" Margin="5"/>
-        </StackPanel>
 
     </Grid>
 

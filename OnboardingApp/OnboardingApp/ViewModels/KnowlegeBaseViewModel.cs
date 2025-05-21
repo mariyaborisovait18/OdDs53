@@ -18,6 +18,7 @@ using OnboardingApp.Models;
 using System.IO;
 using System.Windows;
 using System.Diagnostics;
+using System.Security.Policy;
 
 
 namespace OnboardingApp.ViewModels
@@ -29,6 +30,8 @@ namespace OnboardingApp.ViewModels
 
         public ObservableCollection<Article> FilteredArticles { get; set; }
         public ObservableCollection<string> Categories { get; set; }
+
+        public Article SelectedArticle { get; set; }
 
         private string _searchText;
 
@@ -77,14 +80,19 @@ namespace OnboardingApp.ViewModels
         {
             _articleRepository = new ArticleRepository();
             FilteredArticles = new ObservableCollection<Article>(_articleRepository.GetAllArticles());
-            Categories = new ObservableCollection<string> { "Все", "Инструкции", "Правила" };
+            Categories = new ObservableCollection<string> { "Все", "Учебники", "Правила" };
 
             RefreshCommand = new RelayCommand(_ => RefreshFilteredArticles());
             //
             GoToMainMenuCommand = new RelayCommand(_ => GoToMainMenu());
-            // Новый: Команды для открытия PDF
-            OpenInstructionCommand = new RelayCommand(_ => OpenPdf("Учебник по с++ Стефан Р. Дэвис.pdf"));
-            OpenRulesCommand = new RelayCommand(_ => OpenPdf("Учебник по с шарп М.А.Медведев.pdf"));
+            //// Новый: Команды для открытия PDF
+            //OpenInstructionCommand = new RelayCommand(_ => OpenPdf("Учебник по с++ Стефан Р. Дэвис.pdf"));
+            //OpenRulesCommand = new RelayCommand(_ => OpenPdf("Учебник по с шарп М.А.Медведев.pdf"));
+        }
+
+        public void SelectedArticleChangedCommand()
+        {
+            OpenPdf(SelectedArticle.PdfFilePath);
         }
 
 

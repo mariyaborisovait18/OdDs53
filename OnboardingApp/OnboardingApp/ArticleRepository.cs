@@ -16,8 +16,11 @@ public class ArticleRepository : IArticleRepository
         // Заполнение списка с правильной инициализацией
         _articles = new List<Article>
         {
-            new Article("Инструкция 1", "Инструкции") { PdfFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resources", "PDF", "Учебник по с++ Стефан Р. Дэвис.pdf") },
-            new Article("Правила 1", "Правила") { PdfFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resources", "PDF", "Учебник по с# М.А.Медведев.pdf") },
+            new Article("Учебник(1) по с++", "Учебники") { PdfFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resources", "PDF", "Учебник по с++ Стефан Р. Дэвис.pdf") },
+            new Article("Учебник(2) по с#", "Учебники") { PdfFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resources", "PDF", "Учебник по с шарп М.А.Медведев.pdf") },
+            new Article("Учебник(3) по с#", "Учебники") { PdfFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resources", "PDF", "Учебник по с шарп Б.Пахомов.pdf") },
+            new Article("Правила пользования компьютера(1)", "Правила") { PdfFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resources", "PDF", "Памятка пользования компьютером.pdf") },
+            new Article("Правила пользования компьютера (2)", "Правила") { PdfFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resources", "PDF", "Техника безапности при работе с компьютером.pdf") },
             // добавьте другие статьи
         };
     }

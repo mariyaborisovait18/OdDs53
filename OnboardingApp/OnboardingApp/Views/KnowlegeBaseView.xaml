@@ -8,18 +8,36 @@
         xmlns:syncfusion="clr-namespace:Syncfusion.Windows.PdfViewer;assembly=Syncfusion.PdfViewer.WPF"
         xmlns:vm="clr-namespace:OnboardingApp.ViewModels" 
         xmlns:local="clr-namespace:OnboardingApp"
-        mc:Ignorable="d">
-
+        mc:Ignorable="d"
+        Background="White" Foreground="Black">
 
     <UserControl.Resources>
         <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
+        <!-- Новые стили для исправления проблемы -->
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+        </Style>
+
+        <Style TargetType="DataGridCell">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="BorderBrush" Value="LightGray"/>
+        </Style>
     </UserControl.Resources>
 
     <UserControl.DataContext>
         <vm:KnowlegeBaseViewModel/>
     </UserControl.DataContext>
 
-    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <Grid Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="542*"/>
             <ColumnDefinition Width="133*"/>
@@ -27,52 +45,61 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" MinHeight="32"/>
-            <!-- Auto - Высота автоматически подстраивается под содержимое -->
             <RowDefinition Height="Auto" MinHeight="68"/>
             <RowDefinition Height="281*"/>
             <RowDefinition Height="69*"/>
-            <!--<RowDefinition Height="347*"/>-->
         </Grid.RowDefinitions>
 
-        <TextBlock Text="База знаний" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="29,0,0,0" Height="32" Width="134" />
+        <TextBlock Text="База знаний" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="29,0,0,0" Height="32" Width="134" Foreground="Black"/>
 
         <!-- Поиск и фильтрация-->
-        <StackPanel Orientation="Horizontal" Margin="10,10,10,10" Grid.Row="1" Grid.ColumnSpan="3">
+        <StackPanel Background="White" Orientation="Horizontal" Margin="10,10,10,10" Grid.Row="1" Grid.ColumnSpan="3">
             <!-- Поле поиска -->
             <Grid Width="300">
-                <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" x:Name="SearchTextBox" Margin="0" VerticalAlignment="Center" />
-                <TextBlock Text="Поиск..." Foreground="LightGray" 
+                <TextBox Background="White" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" x:Name="SearchTextBox" VerticalAlignment="Center" Foreground="Black" 
+                         CaretBrush="Black" BorderBrush="Black" Height="28"/>
+                <TextBlock Text=" " Foreground="Gray" 
                            VerticalAlignment="Center" Margin="5,0,0,0" 
                            IsHitTestVisible="False" 
                            Visibility="{Binding SearchText, Converter={StaticResource StringToVisibilityConverter}}"/>
             </Grid>
             <!-- Категория -->
-            <ComboBox ItemsSource="{Binding Categories}" 
-                      SelectedItem="{Binding SelectedCategory, Mode=TwoWay}" Width="154" Margin="10,0,0,0" Height="30" VerticalAlignment="Center"/>
+            <ComboBox Background="White" Foreground="Black" ItemsSource="{Binding Categories}" 
+                      SelectedItem="{Binding SelectedCategory, Mode=TwoWay}" Width="154" Margin="10,0,0,0" Height="28" VerticalAlignment="Center" 
+                      BorderBrush="Black"/>
             <!-- Кнопка "Поиск" -->
-            <Button Content="Поиск" Command="{Binding RefreshCommand}" Margin="5,0,0,0" Width="83" Height="30" VerticalAlignment="Center"/>
+            <Button Background="White" Content="Поиск" Foreground="Black" Command="{Binding RefreshCommand}" Margin="5,0,0,0" Width="83" Height="30" VerticalAlignment="Center"
+                    BorderBrush="Black"/>
             <!--Кнопка "обратно в меню"-->
-            <Button Content="Назад в меню" Command="{Binding GoToMainMenuCommand}" Margin="10" HorizontalAlignment="Left"/>
+            <Button Background="White" Foreground="Black" Content="Назад в меню" Command="{Binding GoToMainMenuCommand}" Margin="10" HorizontalAlignment="Left"
+                    BorderBrush="Black"/>
         </StackPanel>
 
         <!-- DataGrid с данными -->
-        <DataGrid x:Name="ArticlesDataGrid" Grid.Row="2"
-                  
-                   SelectionChanged="ArticlesDataGrid_SelectionChanged"
-                   ItemsSource="{Binding FilteredArticles}" 
-                   AutoGenerateColumns="False" 
-                   Margin="10,10,10,10" IsReadOnly="True" Grid.ColumnSpan="3" Grid.RowSpan="2">
+        <DataGrid Background="White" Foreground="Black" x:Name="ArticlesDataGrid" Grid.Row="2" 
+                  SelectionChanged="ArticlesDataGrid_SelectionChanged"
+                  ItemsSource="{Binding FilteredArticles}" 
+                  AutoGenerateColumns="False" 
+                  Margin="10,10,10,10" IsReadOnly="True" Grid.ColumnSpan="3" Grid.RowSpan="2"
+                  BorderBrush="Black">
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="BorderBrush" Value="LightGray"/>
+                </Style>
+            </DataGrid.CellStyle>
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Название" Binding="{Binding Title}" Width="*"/>
-                <DataGridTextColumn Header="Категория" Binding="{Binding Category}" Width="110"/>
-                <DataGridTextColumn Header="Дата" Binding="{Binding CreatedDate, StringFormat=d}" Width="Auto"/>
+                <DataGridTextColumn Header="Название" Binding="{Binding Title}" Width="*" Foreground="Black"/>
+                <DataGridTextColumn Header="Категория" Binding="{Binding Category}" Width="110" Foreground="Black"/>
+                <DataGridTextColumn Header="Дата" Binding="{Binding CreatedDate, StringFormat=d}" Width="Auto" Foreground="Black"/>
             </DataGrid.Columns>
         </DataGrid>
-
-        <!-- Пример просмотра PDF. Возможно, вы будете использовать другой контрол -->
-
-        <!-- <syncfusion:PdfViewerControl x:Name="pdfViewer"></syncfusion:PdfViewerControl>-->
-
-        <!-- Изменён на Grid.Row="1" -->
     </Grid>
 </UserControl>

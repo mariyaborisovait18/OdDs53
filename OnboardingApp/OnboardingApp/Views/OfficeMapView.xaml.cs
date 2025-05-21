@@ -31,7 +31,7 @@ namespace OnboardingApp.Views
             await myWebView2.EnsureCoreWebView2Async();
             try
             {
-                string mapString = System.Text.Encoding.UTF8.GetString(Properties.Resources.map);
+                string mapString = System.Text.Encoding.UTF8.GetString(Properties.Resources.mappast);
                 myWebView2.NavigateToString(mapString);
 
             }

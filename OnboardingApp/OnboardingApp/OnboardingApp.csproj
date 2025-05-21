@@ -9,8 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\map.html" />
-    <None Remove="Resources\maps.html" />
+    <None Remove="Resources\mappast.html" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,11 +29,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\map.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\maps.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Resource Include="Resources\mappast.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
 

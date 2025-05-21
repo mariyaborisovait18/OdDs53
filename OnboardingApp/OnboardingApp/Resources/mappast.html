@@ -1,0 +1,827 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Карта офиса IT-компании</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+            background-color: #f4f4f4;
+        }
+
+        .office-map {
+            position: relative;
+            width: 1400px;
+            height: 537px;
+            background-color: #778899;
+            border: 2px solid #ccc;
+            padding: 20px;
+            box-sizing: border-box;
+            margin: 0 auto;
+            margin-bottom: 20px; /* Добавляем отступ между прямоугольниками */
+        }
+
+        .office-map1 {
+            position: relative;
+            width: 1400px;
+            height: 100px;
+            background-color: #fff;
+            border: 2px solid #ccc;
+            padding: 20px;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+
+        .room {
+            position: absolute;
+            border: 1px solid #000;
+            background-color: #e0e0e0;
+            padding: 10px;
+        }
+
+        .workplace {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: #4CAF50;
+            border: 1px solid #000;
+            cursor: pointer;
+        }
+
+            .workplace:hover .tooltip {
+                display: block;
+            }
+
+        .tooltip {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            color: #fff;
+            padding: 5px;
+            border-radius: 5px;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+        }
+
+        .corridor {
+            position: absolute;
+            background-color: #ddd;
+            border: 1px solid #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .entrance {
+            position: absolute;
+            background-color: #ccc;
+            border: 1px solid #000;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .line {
+            position: absolute;
+            background-color: #ddd;
+            border: 1px solid #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="office-map">
+        <div class="line" style="top: 20px; left: 15px; width: 45px; height: 2px; background-color: #000; border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 33px; left: 15px; width: 50px; height: 2px; background-color: #000; border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 45px; left: 15px; width: 55px; height: 2px;  background-color: #000;  border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 60px; left: 15px; width: 60px; height: 2px; background-color: #000; border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 73px; left: 15px; width: 65px; height: 2px; background-color: #000; border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 85px; left: 15px; width: 70px; height: 2px;  background-color: #000; border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 97px; left: 15px; width: 110px; height: 2px; background-color: #000; border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 109px; left: 80px; width: 45px; height: 2px; background-color: #000; border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 120px; left: 75px; width: 50px; height: 2px; background-color: #000; border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 132px; left: 70px; width: 55px; height: 2px; background-color: #000;border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 145px; left: 65px; width: 60px; height: 2px; background-color: #000; border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 161px; left: 60px; width: 65px; height: 2px; background-color: #000; border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 173px; left: 55px; width: 70px; height: 2px; background-color: #000; border-radius: 10px;">
+        </div>
+
+        <!-- часть лестничной клетки конец -->
+        <!-- СТЕНЫ  -->
+        <div class="line" style="top: 133px; left: 220px; width: 74px; height: 2px; background-color: #000; border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 133px; left: 316px; width: 54px; height: 2px;  background-color: #000; border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 133px; left: 150px; width: 34px; height: 2px;  background-color: #000; border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 5px; left: 370px; width: 2px; height: 182px; background-color: #000;  border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 220px; left: 5px; width: 80px; height: 2px; background-color: #000; border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 220px; left: 85px; width: 2px; height: 45px; background-color: #000;  border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 352px; left: 5px; width: 120px; height: 2px; background-color: #000; border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 352px; left: 195px; width: 45px; height: 2px;background-color: #000; border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 309px; left: 85px; width: 2px; height: 45px; background-color: #000; border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 355px; left: 218px; width: 2px; height: 165px;  background-color: #000; border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 255px; left: 335px; width: 2px; height: 264px; background-color: #000; border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 352px; left: 280px; width: 928px; height: 2px; background-color: #000; border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 5px; left: 150px; width: 2px; height: 130px; background-color: #000;border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 5px; left: 248px; width: 2px; height: 130px; background-color: #000;border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 355px; left: 472px; width: 2px; height: 165px;background-color: #000;border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 255px; left: 619px; width: 2px; height: 267px;background-color: #000;border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 355px; left: 766px; width: 2px; height: 165px;background-color: #000;border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 255px; left: 913px; width: 2px; height: 264px;background-color: #000;border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 255px; left: 713px; width: 2px; height: 98px;background-color: #000;border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 215px; left: 1061px; width: 2px; height: 305px; background-color: #000;border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 215px; left: 1206px; width: 2px; height: 305px; background-color: #000;border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 5px; left: 513px; width: 2px; height: 182px; background-color: #000; border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 5px; left: 656px; width: 2px; height: 182px; background-color: #000;border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 5px; left: 799px; width: 2px; height: 182px;background-color: #000;border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 5px; left: 942px; width: 2px; height: 182px; background-color: #000; border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 5px; left: 1206px; width: 2px; height: 140px; background-color: #000;border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 185px; left: 370px; width: 630px; height: 2px; background-color: #000; border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 145px; left: 999px; width: 2px; height: 40px; background-color: #000;border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 145px; left: 1259px; width: 2px; height: 40px; background-color: #000; border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 145px; left: 999px; width: 262px; height: 2px; background-color: #000; border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 185px; left: 1259px; width: 133px; height: 2px; background-color: #000; border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 185px; left: 1300px; width: 2px; height: 334px; background-color: #000; border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 395px; left: 1209px; width: 93px; height: 2px;background-color: #000;border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 352px; left: 1300px; width: 93px; height: 2px; background-color: #000;border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 295px; left: 1300px; width: 93px; height: 2px; background-color: #000;border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 245px; left: 1300px; width: 93px; height: 2px; background-color: #000; border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 253px; left: 713px; width: 200px; height: 2px;background-color: #000;border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 253px; left: 335px; width: 285px; height: 2px; background-color: #000; border-radius: 10px;">
+        </div>
+        <div class="line" style="top: 213px; left: 1061px; width: 147px; height: 2px;background-color: #000; border-radius: 10px;">
+        </div>
+
+
+        <!--<платформа лестничная клетка>-->
+        <div class="workplace" style="top: 15px; left: 25px; width: 100px; height: 120px; border-radius: 0 0 0 0; background-color: #00000000; border: 1px solid #00000000; ">
+            <div class="tooltip">лестничная<br>клетка</div>
+        </div>
+        <!--<платформа середина>-->
+        <div class="workplace" style="top: 225px; left: 5px; width: 75px; height: 100px; border-radius: 0 0 0 0; background-color: #00000000; border: 1px solid #00000000; ">
+            <div class="tooltip">отдел ...</div>
+        </div>
+        <!--<платформа 1 вверх>-->
+        <div class="workplace" style="top: 8px; left: 153px; width: 73px; height: 103px; border-radius: 0 0 0 0; background-color: #00000000; border: 1px solid #00000000; ">
+            <div class="tooltip">отдел ...</div>
+        </div>
+        <!--<платформа 2 вверх>-->
+        <div class="workplace" style="top: 8px; left: 255px; width: 93px; height: 103px; border-radius: 0 0 0 0; background-color: #00000000; border: 1px solid #00000000; ">
+            <div class="tooltip">отдел ...</div>
+        </div>
+        <!--<платформа 3 вверх>-->
+        <div class="workplace" style="top: 8px; left: 375px; width: 109px; height: 148px; border-radius: 0 0 0 0; background-color: #00000000; border: 1px solid #00000000; ">
+            <div class="tooltip">отдел ...</div>
+        </div>
+        <!--<платформа 4 вверх>-->
+        <div class="workplace" style="top: 8px; left: 520px; width: 113px; height: 149px; border-radius: 0 0 0 0; background-color: #00000000; border: 1px solid #00000000; ">
+            <div class="tooltip">отдел ...</div>
+        </div>
+        <!--<платформа 5 вверх>-->
+        <div class="workplace" style="top: 8px; left: 660px; width: 113px; height: 149px; border-radius: 0 0 0 0; background-color: #00000000; border: 1px solid #00000000; ">
+            <div class="tooltip">отдел ...</div>
+        </div>
+        <!--<платформа 6 вверх>-->
+        <div class="workplace" style="top: 8px; left: 805px; width: 113px; height: 149px; border-radius: 0 0 0 0; background-color: #00000000; border: 1px solid #00000000; ">
+            <div class="tooltip">отдел ...</div>
+        </div>
+        <!--<платформа 7 вверх>-->
+        <div class="workplace" style="top: 8px; left: 950px; width: 228px; height: 115px; border-radius: 0 0 0 0; background-color: #00000000; border: 1px solid #00000000; ">
+            <div class="tooltip">отдел ...</div>
+        </div>
+        <!--<платформа 8 вверх>-->
+        <div class="workplace" style="top: 8px; left: 1210px; width: 158px; height: 115px; border-radius: 0 0 0 0; background-color: #00000000; border: 1px solid #00000000; ">
+            <div class="tooltip">отдел ...</div>
+        </div>
+        <!--<платформа 1 низ>-->
+        <div class="workplace" style="top: 355px; left: 5px; width: 190px; height: 150px; border-radius: 0 0 0 0; background-color: #00000000; border: 1px solid #00000000; ">
+            <div class="tooltip">отдел ...</div>
+        </div>
+        <!--<платформа 2 низ>-->
+        <div class="workplace" style="top: 355px; left: 226px; width: 90px; height: 150px; border-radius: 0 0 0 0; background-color: #00000000; border: 1px solid #00000000; ">
+            <div class="tooltip">отдел ...</div>
+        </div>
+        <!--<платформа 3 низ>-->
+        <div class="workplace" style="top: 355px; left: 342px; width: 110px; height: 150px; border-radius: 0 0 0 0; background-color: #00000000; border: 1px solid #00000000; ">
+            <div class="tooltip">отдел ...</div>
+        </div>
+        <!--<платформа 4 низ>-->
+        <div class="workplace" style="top: 355px; left: 478px; width: 115px; height: 150px; border-radius: 0 0 0 0; background-color: #00000000; border: 1px solid #00000000; ">
+            <div class="tooltip">отдел ...</div>
+        </div>
+        <!--<платформа 5 низ>-->
+        <div class="workplace" style="top: 355px; left: 620px; width: 115px; height: 150px; border-radius: 0 0 0 0; background-color: #00000000; border: 1px solid #00000000; ">
+            <div class="tooltip">отдел ...</div>
+        </div>
+        <!--<платформа 6 низ>-->
+        <div class="workplace" style="top: 355px; left: 776px; width: 115px; height: 150px; border-radius: 0 0 0 0; background-color: #00000000; border: 1px solid #00000000; ">
+            <div class="tooltip">отдел ...</div>
+        </div>
+        <!--<платформа 7 низ>-->
+        <div class="workplace" style="top: 355px; left: 920px; width: 115px; height: 150px; border-radius: 0 0 0 0; background-color: #00000000; border: 1px solid #00000000; ">
+            <div class="tooltip">отдел ...</div>
+        </div>
+        <!--<платформа 9 низ>-->
+        <div class="workplace" style="top: 395px; left: 1210px; width: 75px; height: 107px; border-radius: 0 0 0 0; background-color: #00000000; border: 1px solid #00000000; ">
+            <div class="tooltip">отдел ...</div>
+        </div>
+        <!--<платформа ЦЕНТР>-->
+        <div class="room" style="top: 204px; left: 645px; width: 505px; height: 30px; border-radius: 0 0 0 0; background-color: #00000000; border: 1px solid #00000000; ">
+            <strong>2 этаж</strong>
+        </div>
+
+        <!--<комната средняя >-->
+        <!--<СТОЛЫ >-->
+        <!--<вертикаль стола  >-->
+        <div class="line" style="top: 230px; left: 10px; width: 15px; height: 40px; background-color: #141037; border-radius: 5px; border: 1px solid #141037; ">
+        </div>
+        <!--<горизонталь стола  >-->
+        <div class="line" style="top: 254px; left: 10px; width: 40px; height: 16px; background-color: #141037; border-radius: 5px; border: 1px solid #141037; ">
+        </div>
+        <div class="line" style="top: 294px; left: 10px; width: 15px; height: 40px; background-color: #141037; border-radius: 5px; border: 1px solid #141037; ">
+        </div>
+        <div class="line" style="top: 294px; left: 10px; width: 40px; height: 16px; background-color: #141037; border-radius: 5px; border: 1px solid #141037; ">
+        </div>
+        <!--< ЧЕЛОВЕКИ >-->
+        <div class="workplace" style="top: 232px; left: 29px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 315px; left: 29px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 415px; left: 780px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+
+        <!--столы комат 1 и 2 вверх и 2 низ>-->
+        <!--<вертикаль стола  >-->
+        <div class="line" style="top: 259px; left: 265px; width: 15px; height: 75px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <!--<горизонталь стола  >-->
+        <div class="line" style="top: 259px; left: 265px; width: 49px; height: 17px; background-color: #141037; border-radius: 5px; border: 1px solid #141037; ">
+        </div>
+        <div class="line" style="top: 390px; left: 255px; width: 15px; height: 120px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 428px; left: 230px; width: 40px; height: 40px; background-color: #141037; border-radius: 5px; border: 1px solid #141037; ">
+        </div>
+        <div class="line" style="top: 385px; left: 285px; width: 15px; height: 120px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 423px; left: 286px; width: 40px; height: 40px; background-color: #141037; border-radius: 5px; border: 1px solid #141037; ">
+        </div>
+        <div class="line" style="top: 5px; left: 151px; width: 15px; height: 120px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 5px; left: 233px; width: 15px; height: 109px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 86px; left: 248px; width: 15px; height: 45px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 10px; left: 310px; width: 15px; height: 98px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+
+
+        <!--<3 комната сверху  >-->
+        <!--<СТОЛЫ >-->
+        <!--<вертикаль стола  >-->
+        <div class="line" style="top: 10px; left: 410px; width: 15px; height: 40px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <!--<горизонталь стола  >-->
+        <div class="line" style="top: 10px; left: 385px; width: 40px; height: 16px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 10px; left: 460px; width: 15px; height: 40px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 10px; left: 460px; width: 40px; height: 16px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 74px; left: 410px; width: 15px; height: 40px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 65px; left: 460px; width: 15px; height: 40px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 137px; left: 410px; width: 15px; height: 45px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 120px; left: 370px; width: 7px; height: 28px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 40px; left: 370px; width: 7px; height: 28px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 120px; left: 506px; width: 7px; height: 50px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <!--< ЧЕЛОВЕКИ >-->
+        <div class="workplace" style="top: 32px; left: 388px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 85px; left: 388px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 148px; left: 388px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 32px; left: 480px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 85px; left: 480px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+
+
+        <!--<4 комната сверху  >-->
+        <!--<СТОЛЫ >-->
+        <!--<вертикаль стола  >-->
+        <div class="line" style="top: 10px; left: 560px; width: 15px; height: 40px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <!--<горизонталь стола  >-->
+        <div class="line" style="top: 10px; left: 533px; width: 40px; height: 16px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 70px; left: 560px; width: 15px; height: 80px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 100px; left: 533px; width: 40px; height: 16px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 10px; left: 602px; width: 15px; height: 40px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 10px; left: 603px; width: 40px; height: 16px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 110px; left: 602px; width: 15px; height: 45px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 140px; left: 603px; width: 40px; height: 16px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 65px; left: 647px; width: 8px; height: 55px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <!--< ЧЕЛОВЕКИ >-->
+        <div class="workplace" style="top: 32px; left: 538px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 75px; left: 538px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 128px; left: 538px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 32px; left: 625px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 118px; left: 625px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+
+
+        <!--<5 комната сверху  >-->
+        <!--<СТОЛЫ >-->
+        <!--<вертикаль стола  >-->
+        <div class="line" style="top: 10px; left: 700px; width: 15px; height: 40px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <!--<горизонталь стола  >-->
+        <div class="line" style="top: 10px; left: 673px; width: 40px; height: 16px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 70px; left: 700px; width: 15px; height: 40px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 130px; left: 700px; width: 15px; height: 50px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 70px; left: 750px; width: 15px; height: 40px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 10px; left: 750px; width: 15px; height: 40px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 120px; left: 792px; width: 7px; height: 50px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <!--<круг для стола>-->
+        <div class="room" style="top: 135px; left: 728px; width: 14px; height: 14px; background-color: #AFEEEE; border-radius: 45px; border: 1px solid #AFEEEE; ">
+        </div>
+        <!--<круг для стола >-->
+        <div class="line" style="top: 158px; left: 723px; width: 9px; height: 9px; background-color: #AFEEEE; border-radius: 45px; border: 1px solid #AFEEEE; ">
+        </div>
+        <!--<круг для стола >-->
+        <div class="line" style="top: 128px; left: 737px; width: 9px; height: 9px; background-color: #AFEEEE; border-radius: 45px; border: 1px solid #AFEEEE; ">
+        </div>
+        <!--<круг для стола >-->
+        <div class="line" style="top: 158px; left: 758px; width: 9px; height: 9px; background-color: #AFEEEE; border-radius: 45px; border: 1px solid #AFEEEE; ">
+        </div>
+        <!--< ЧЕЛОВЕКИ >-->
+        <div class="workplace" style="top: 32px; left: 675px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 85px; left: 675px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 148px; left: 675px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 25px; left: 773px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 85px; left: 773px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+
+
+        <!--<6 комната сверху  >-->
+        <!--<СТОЛЫ >-->
+        <!--<вертикаль стола  >-->
+        <div class="line" style="top: 120px; left: 840px; width: 7px; height: 60px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <!--<горизонталь стола  >-->
+        <div class="line" style="top: 50px; left: 860px; width: 50px; height: 26px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 35px; left: 900px; width: 15px; height: 55px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <!--< ЧЕЛОВЕКИ >-->
+        <div class="workplace" style="top: 55px; left: 920px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+
+        <!--<7 комната сверху  >-->
+        <!--<СТОЛЫ >-->
+        <!--<вертикаль стола  >-->
+        <div class="line" style="top: 15px; left: 945px; width: 9px; height: 20px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 95px; left: 945px; width: 9px; height: 40px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <!--<горизонталь стола  >-->
+        <div class="line" style="top: 120px; left: 945px; width: 30px; height: 26px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 50px; left: 965px; width: 50px; height: 26px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 26px; left: 1010px; width: 15px; height: 70px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="room" style="top: 20px; left: 1035px; width: 14px; height: 14px; background-color: #AFEEEE; border-radius: 45px; border: 1px solid #AFEEEE; ">
+        </div>
+        <div class="line" style="top: 34px; left: 1067px; width: 9px; height: 9px; background-color: #AFEEEE; border-radius: 45px; border: 1px solid #AFEEEE; ">
+        </div>
+        <div class="line" style="top: 90px; left: 1050px; width: 70px; height: 26px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 113px; left: 1073px; width: 26px; height: 26px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 5px; left: 1090px; width: 20px; height: 40px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 5px; left: 1140px; width: 20px; height: 40px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 90px; left: 1140px; width: 20px; height: 40px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 20px; left: 1198px; width: 7px; height: 110px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 150px; left: 991px; width: 7px; height: 30px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <!--< ЧЕЛОВЕКИ >-->
+        <div class="workplace" style="top: 25px; left: 975px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 83px; left: 970px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 153px; left: 955px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 25px; left: 773px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 85px; left: 773px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 119px; left: 1050px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 121px; left: 1108px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 20px; left: 1115px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+
+
+        <!--<8 комната сверху  >-->
+        <!--<СТОЛЫ >-->
+        <!--<вертикаль стола  >-->
+        <div class="line" style="top: 15px; left: 1250px; width: 20px; height: 40px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 15px; left: 1320px; width: 50px; height: 50px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 120px; left: 1300px; width: 50px; height: 50px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 74px; left: 1350px; width: 15px; height: 40px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <!--< ЧЕЛОВЕКИ >-->
+        <div class="workplace" style="top: 25px; left: 1300px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d0; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 29px; left: 1230px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 29px; left: 1375px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 85px; left: 1370px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 145px; left: 1360px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 145px; left: 1275px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+
+
+        <!--<3 комната снизу  >-->
+        <!--<СТОЛЫ >-->
+        <!--<вертикаль стола  >-->
+        <div class="line" style="top: 400px; left: 370px; width: 15px; height: 35px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <!--<горизонталь стола  >-->
+        <div class="line" style="top: 390px; left: 345px; width: 40px; height: 16px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 450px; left: 370px; width: 15px; height: 35px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 480px; left: 345px; width: 40px; height: 16px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 450px; left: 386px; width: 15px; height: 35px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 480px; left: 383px; width: 40px; height: 16px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 450px; left: 430px; width: 15px; height: 35px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 480px; left: 430px; width: 35px; height: 16px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 390px; left: 430px; width: 15px; height: 35px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 390px; left: 430px; width: 35px; height: 16px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 354px; left: 350px; width: 110px; height: 7px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <!--< ЧЕЛОВЕКИ >-->
+        <div class="workplace" style="top: 410px; left: 345px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 460px; left: 345px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 460px; left: 405px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 410px; left: 448px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 450px; left: 448px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+
+
+        <!--<4 комната снизу  >-->
+        <!--<СТОЛЫ >-->
+        <!--<вертикаль стола  >-->
+        <div class="line" style="top: 400px; left: 510px; width: 15px; height: 35px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <!--<горизонталь стола  >-->
+        <div class="line" style="top: 390px; left: 485px; width: 40px; height: 16px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 450px; left: 510px; width: 15px; height: 35px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 480px; left: 485px; width: 40px; height: 16px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 450px; left: 526px; width: 15px; height: 35px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 480px; left: 525px; width: 40px; height: 16px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 450px; left: 576px; width: 15px; height: 35px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 480px; left: 576px; width: 35px; height: 16px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 390px; left: 576px; width: 15px; height: 35px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 390px; left: 576px; width: 35px; height: 16px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 354px; left: 500px; width: 110px; height: 7px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <!--< ЧЕЛОВЕКИ >-->
+        <div class="workplace" style="top: 410px; left: 490px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 460px; left: 490px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 460px; left: 548px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 410px; left: 598px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 450px; left: 595px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+
+
+        <!--<5 комната снизу  >-->
+        <!--<СТОЛЫ >-->
+        <!--<вертикаль стола  >-->
+        <div class="line" style="top: 400px; left: 660px; width: 15px; height: 35px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <!--<горизонталь стола  >-->
+        <div class="line" style="top: 390px; left: 635px; width: 40px; height: 16px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 450px; left: 660px; width: 15px; height: 35px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 480px; left: 635px; width: 40px; height: 16px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 450px; left: 676px; width: 15px; height: 35px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 480px; left: 675px; width: 40px; height: 16px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 450px; left: 726px; width: 15px; height: 35px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 480px; left: 726px; width: 35px; height: 16px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 390px; left: 726px; width: 15px; height: 35px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 390px; left: 726px; width: 35px; height: 16px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 354px; left: 690px; width: 70px; height: 7px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 354px; left: 630px; width: 30px; height: 7px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <!--< ЧЕЛОВЕКИ >-->
+        <div class="workplace" style="top: 410px; left: 640px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 460px; left: 640px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 460px; left: 698px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 410px; left: 745px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 450px; left: 745px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+
+
+
+        <!--<7 комната снизу  >-->
+        <!--<СТОЛЫ >-->
+        <!--<вертикаль стола  >-->
+        <div class="line" style="top: 390px; left: 950px; width: 15px; height: 45px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 470px; left: 950px; width: 15px; height: 45px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 470px; left: 930px; width: 35px; height: 15px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 365px; left: 1010px; width: 15px; height: 40px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 420px; left: 1010px; width: 15px; height: 40px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 475px; left: 1010px; width: 15px; height: 40px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <!--<горизонталь стола  >-->
+        <div class="line" style="top: 354px; left: 920px; width: 30px; height: 7px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 354px; left: 980px; width: 20px; height: 7px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <!--< ЧЕЛОВЕКИ >-->
+        <div class="workplace" " style="top: 450px; left: 925px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 450px; left: 955px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 490px; left: 925px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 400px; left: 930px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 370px; left: 1030px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 430px; left: 1030px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 480px; left: 1030px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+
+
+
+
+        <!--<9 комната снизу  >-->
+        <!--<СТОЛЫ >-->
+        <!--<вертикаль стола  >-->
+        <div class="line" style="top: 435px; left: 1253px; width: 15px; height: 40px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <div class="line" style="top: 399px; left: 1270px; width: 28px; height: 80px; background-color: #AFEEEE; border-radius: 0px; border: 1px solid #AFEEEE; ">
+        </div>
+        <div class="line" style="top: 485px; left: 1294px; width: 7px; height: 25px; background-color: #141037; border-radius: 5px; border: 1px solid #141037;">
+        </div>
+        <!--< ЧЕЛОВЕКИ >-->
+        <div class="workplace" style="top: 450px; left: 1230px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+
+
+
+        <!--< ЧЕЛОВЕКИ комнат 1-2 вверх и 2 низ>-->
+        <div class="workplace" style="top: 289px; left: 291px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 392px; left: 223px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 485px; left: 223px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 395px; left: 310px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 485px; left: 310px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 32px; left: 330px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 52px; left: 285px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+        <div class="workplace" style="top: 72px; left: 330px; width: 17px; height: 17px; background-color: #101e6d; border-radius: 45px; border: 1px solid #101e6d; ">
+            <div class="tooltip">Иван Иванов<br>Senior</div>
+        </div>
+
+
+        <!--<'ЭЛЕМЕНТЫ ОФИСА' >-->
+        <!--<круг для принтера >-->
+        <div class="workplace" style="top: 195px; left: 75px; width: 30px; height: 30px; background-color: #FFA500; border-radius: 45px; border: 1px solid #FFA500; ">
+            <div class="tooltip">Принтер</div>
+        </div>
+        <!--<круг для принтера2 >-->
+        <div class="workplace" style="top: 322px; left: 310px; width: 30px; height: 30px; background-color: #FFA500; border-radius: 45px; border: 1px solid #FFA500; ">
+            <div class="tooltip">WiFi<br>DECT</div>
+        </div>
+        <!--<круг для принтера3 >-->
+        <div class="workplace" style="top: 166px; left: 635px; width: 30px; height: 30px; background-color: #FFA500; border-radius: 45px; border: 1px solid #FFA500; ">
+            <div class="tooltip">WiFi<br>DECT</div>
+        </div>
+        <!--<круг для принтера4 >-->
+        <div class="workplace" style="top: 250px; left: 905px; width: 30px; height: 30px; background-color: #FFA500; border-radius: 45px; border: 1px solid #FFA500; ">
+            <div class="tooltip">WiFi<br>DECT<br>Принтер</div>
+        </div>
+        <!--<круг для принтера5 >-->
+        <div class="workplace" style="top: 135px; left: 1135px; width: 30px; height: 30px; background-color: #FFA500; border-radius: 45px; border: 1px solid #FFA500; ">
+            <div class="tooltip">WiFi<br>DECT</div>
+        </div>
+    </div>
+</body>
+</html>

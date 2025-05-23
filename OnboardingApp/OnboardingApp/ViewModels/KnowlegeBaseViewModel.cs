@@ -46,7 +46,7 @@ namespace OnboardingApp.ViewModels
             }
         }
 
-        private string _selectedCategory;
+        private string _selectedCategory = "Всё";
         public string SelectedCategory
         {
             get => _selectedCategory;
@@ -92,6 +92,7 @@ namespace OnboardingApp.ViewModels
 
         public void SelectedArticleChangedCommand()
         {
+            if (SelectedArticle == null) return;
             OpenPdf(SelectedArticle.PdfFilePath);
         }
 
